@@ -50,3 +50,14 @@ Project Repository: [https://github.com/p3nGu1nZz/Dialogos-LLM](https://github.c
 - Unity Technologies
 - The ML-Agents Community
 - All our contributors and supporters
+
+```
+@misc{LocalLlama,
+  author = {p3nGu1nZz},
+  title = {Dialogos-LLM - Dialogos LLM: Unleashing the power of language through Unity-driven AI.},
+  year = {2024},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\\url{https://github.com/p3nGu1nZz/Dialogos-LLM}}
+}
+```
