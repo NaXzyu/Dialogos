@@ -1,36 +1,30 @@
 ## Building Dialogos LLM
 
-To build your LLM (Language Learning Model) in Unity with ML-Agents, you'll need to follow these general steps:
+To build one's Language Learning Model (LLM) in Unity with ML-Agents, the following general steps are required:¹[1]
 
-1. **Install ML-Agents**: Make sure you have the ML-Agents Unity package installed in your project. You can install it via the Unity Package Manager or directly from the [GitHub repository](^5^).
+1. **Installation of ML-Agents**: The ML-Agents Unity package must be installed in the project, which can be done via the Unity Package Manager or directly from the GitHub repository.
+2. **Environment Setup**: The Unity environment must be configured for the LLM, involving the creation or importation of necessary assets, scene setup, and readiness for training.
+3. **Agent Implementation**: Agents that will interact with the environment must be developed within Unity, defining their observations, actions, and rewards.
+4. **Local Training Configuration**: Necessary training configuration files and scripts, including the `trainer_config.yaml` for hyperparameters and any Python scripts needed for training, must be copied to the project.
+5. **Agent Training**: The ML-Agents Python package is used to train the agents, running the `mlagents-learn` command with the configuration file and environment.
+6. **Model Evaluation and Embedding**: Post-training, the model's performance is evaluated. Once satisfactory, the trained model is embedded back into the Unity project for inference.
 
-2. **Set Up Your Environment**: Configure your Unity environment for the LLM. This involves creating or importing necessary assets, setting up the scene, and ensuring that your environment is ready for training.
+Designing an agent in Unity with ML-Agents to function as a Language Learning Model involves creating an agent capable of processing and generating language-based data. The design process includes:
 
-3. **Implement Your Agents**: Develop the agents within Unity that will interact with the environment. You'll need to define their observations, actions, and rewards.
+1. **Observations**: Agents must observe text data, which can be achieved by converting text into numerical data such as word embeddings or one-hot encoded vectors.
+2. **Actions**: The complexity of language tasks dictates the use of discrete or continuous actions, or a combination of both, with discrete actions involving word selection from a predefined vocabulary and continuous actions allowing nuanced control over language generation.
+3. **Rewards**: A reward system is defined to encourage coherent and contextually appropriate language generation, potentially based on metrics like BLEU score for translation tasks.
+4. **Neural Network Architecture**: Sequential data processing requires suitable neural network architectures, such as LSTM or Transformer models.
+5. **Training**: Reinforcement learning algorithms provided by ML-Agents, like Proximal Policy Optimization (PPO), are used for training, with curriculum learning to increase task complexity gradually.
+6. **Integration**: The trained LLM is integrated with the ML-Agents API, enabling action performance and observation reception within the Unity environment.
 
-4. **Local Training Configuration**: Copy the necessary training configuration files and scripts to your project. These will include the `trainer_config.yaml` for hyperparameters and any Python scripts needed for training.
+The detailed design includes setting up a chat panel UI in Unity, implementing text processing systems, and defining agent observations and actions. The reward function rewards coherent, relevant, and diverse language generation, and the neural network architecture employs sequence modeling and attention mechanisms. The training process involves curriculum learning, imitation learning, and reinforcement learning, with continuous evaluation and model improvement leading to deployment and potential continuous learning.
 
-5. **Train Your Agents**: Use the ML-Agents Python package to train your agents. This will involve running the `mlagents-learn` command with your configuration file and environment.
+The training execution phase involves initializing the ML-Agents environment, starting training sessions, agent-environment interaction, data collection, learning algorithm application, policy updates, simulation and training loops, monitoring, evaluation and adjustment, and model saving and exporting.
 
-6. **Evaluate and Embed the Model**: After training, you'll need to evaluate the performance of your model. Once satisfied, you can embed the trained model back into your Unity project for inference.
+Simulation and training loops are essential for reinforcement learning, with the agent repeatedly interacting with the environment to improve its policy. This involves simulation initialization, episode starts, agent actions, environment responses, data collection, policy updates, loop continuation, parallel simulations, progress monitoring, and training adjustments and optimization.
 
-Designing an agent in Unity with ML-Agents to function like a Language Learning Model (LLM) involves creating an agent that can process and generate language-based data. Here's a high-level overview of how you might design such an agent:
-
-1. **Observations**: The agent should be able to observe text data. This could be done by converting text into numerical data that the agent can understand, such as word embeddings or one-hot encoded vectors.
-
-2. **Actions**: Depending on the complexity of the language tasks, you can use either discrete or continuous actions, or a combination of both. 
-   - **Discrete actions** might involve selecting words from a predefined vocabulary to form sentences.
-   - **Continuous actions** could be used for more nuanced control over language generation, such as adjusting the sentiment or style of the generated text.
-
-3. **Rewards**: Define a reward system that encourages the agent to generate coherent, contextually appropriate language. This could be based on metrics like BLEU score for translation tasks or other NLP-specific evaluation metrics.
-
-4. **Neural Network Architecture**: Use a neural network architecture suitable for processing sequential data, such as LSTM or Transformer models, which are commonly used in NLP tasks.
-
-5. **Training**: Train the agent using reinforcement learning algorithms provided by ML-Agents, such as Proximal Policy Optimization (PPO), and consider using curriculum learning to gradually increase the complexity of language tasks.
-
-6. **Integration**: Integrate the trained LLM with the ML-Agents API, allowing it to perform actions and receive observations within the Unity environment.
-
----
+Creating training datasets involves data collection, formatting, directory organization, initial training sets creation, coding actions and observations, scripting language for datasets, and training with continuous actions²²[22]. Continuous observations and actions are coded using XML for structured training data, allowing for clear hierarchy and representation of nested structures.
 
 ## Detailed Design:
 
