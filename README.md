@@ -52,7 +52,7 @@ Project Repository: [https://github.com/p3nGu1nZz/Dialogos-LLM](https://github.c
 - All our contributors and supporters
 
 ```
-@misc{LocalLlama,
+@misc{Dialogos-LLM,
   author = {p3nGu1nZz},
   title = {Dialogos-LLM - Dialogos LLM: Unleashing the power of language through Unity-driven AI.},
   year = {2024},
