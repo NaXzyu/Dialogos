@@ -1,64 +1,64 @@
 using UnityEngine;
 using Unity.Logging;
-using System.Collections.Generic;
+using CommandTerminal;
+using Unity.VisualScripting.Antlr3.Runtime;
 
 public class AgentController : MonoBehaviour
 {
-    class TokenState
-    {
-        public string token;
-        public int position;
-
-        public TokenState(string token, int position)
-        {
-            this.token = token;
-            this.position = position;
-        }
-    }
+    private Terminal terminal;
 
     void Start()
     {
-        Log.Info("Initialize Agent Controller");
-        // TODO: Initialization code here
+        terminal = FindAnyObjectByType<Terminal>();
+        if (terminal == null)
+        {
+            Log.Error("Terminal component not found in the scene.");
+        }
     }
 
     void Update()
     {
-        // TODO: Input handling and state processing here
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ProcessTerminalLog();
+        }
     }
 
-    /// <summary>
-    /// Example method to process a string and create token states
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    List<TokenState> ProcessString(string input)
+    void ProcessTerminalLog()
     {
-        List<TokenState> states = new List<TokenState>();
-        int currentPosition = 0;
-
-        // Example logic to determine chunk sizes and create states
-        while (currentPosition < input.Length)
+        Log.Info("Process Terminal Log");
+        var _logs = Terminal.Buffer.Logs;
+        var _countX = 0;
+        foreach (var log in _logs)
         {
-            int chunkSize = DetermineChunkSize(input, currentPosition);
-            string token = input.Substring(currentPosition, chunkSize);
-            TokenState newState = new TokenState(token, currentPosition);
-            states.Add(newState);
-            currentPosition += chunkSize;
+            ++_countX;
+            var _countY = 0;
+            Log.Info("message=" + log.message);
+            var _tokens = log.message.Split(' ');
+            foreach (string _token in _tokens)
+            {
+                ++_countY;
+                Log.Info("token=" + _token);
+                TokenState state = new TokenState(_token);
+                // TODO: Add state to your state management system
+            }
+        }
+    }
+
+    class TokenState
+    {
+        public string token;
+
+        public TokenState(string token)
+        {
+            this.token = token;
         }
 
-        return states;
+        public override string ToString()
+        {
+            return token;
+        }
     }
 
-    /// <summary>
-    /// Placeholder method to determine the size of the next token
-    /// </summary>
-    /// <param name="input"></param>
-    /// <param name="position"></param>
-    /// <returns></returns>
-    int DetermineChunkSize(string input, int position)
-    {
-        // TODO: Implement logic to determine chunk size based on input and position
-        return 1; // For now, we just return 1 to move one character at a time
-    }
+    // TODO: Implement other methods for state management and conversation handling
 }
