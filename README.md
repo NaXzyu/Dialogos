@@ -32,7 +32,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourusername)
+p3nGu1nZz- [@p3ngu1nzz](https://twitter.com/yourusername)
 Project Link: [https://github.com/yourusername/Dialogos-LLM](https://github.com/yourusername/Dialogos-LLM)
 
 ## Acknowledgments
