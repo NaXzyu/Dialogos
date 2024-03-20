@@ -1,4 +1,4 @@
-# Dialogos: A Next Generation LLM
+# Dialogos: Next Generation LLM
 
 **Dialogos** is a cutting-edge language learning model designed to revolutionize the way we interact with AI-driven language processing. By integrating seamlessly with **Unity**, a popular game development platform, Dialogosoffers an immersive and interactive experience that goes beyond traditional language learning methods.
 
