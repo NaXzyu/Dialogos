@@ -1,0 +1,12 @@
+name: Dialogos
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.12
+  - conda-pack
+  - ascii-art
+  - GitPython
+  - click
+  - rich
+  - tqdm

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Text;
 using System.Collections;
 using UnityEngine.Assertions;
+using UnityEditor;
 
 namespace CommandTerminal
 {
@@ -177,23 +178,36 @@ namespace CommandTerminal
                 Autocomplete.Register(command.Key);
             }
 
+            PrintWelcome();
+
             SetState(TerminalState.OpenFull);
             initial_open = true;
         }
 
+        void PrintWelcome()
+        {
+            Log("........................................................................");
+            Log("........................................................................");
+            Log("..... D I A L O G O S - L L M ..........................................");
+            Log("........................................................................");
+            Log("...............................................................c.2024...");
+            Log("\n");
+            Log("- - - - - - - - - - - - - - - - - -");
+            Log("\n");
+            Log("MEMORY:      OKAY!");
+            Log("SYSTEM:      OKAY!");
+            Log("BOOT:        OKAY!");
+            Log("ENCRYPTION:  OKAY!");
+            Log("DEVICE:      OKAY!");
+            Log("\n");
+            Log("===== Ready! =====");
+            Log("\n");
+            Log("- - - - - - - - - - - - - - - - - -");
+            Log("\n\n\n\n\n");
+        }
+
         void OnGUI()
         {
-            //if (Event.current.Equals(Event.KeyboardEvent(ToggleHotkey)))
-            //{
-            //    SetState(TerminalState.OpenSmall);
-            //    initial_open = true;
-            //}
-            //else if (Event.current.Equals(Event.KeyboardEvent(ToggleFullHotkey)))
-            //{
-            //    SetState(TerminalState.OpenFull);
-            //    initial_open = true;
-            //}
-
             if (ShowGUIButtons)
             {
                 DrawGUIButtons();
@@ -213,7 +227,6 @@ namespace CommandTerminal
             real_window_size = Screen.height * MaxHeight / 3;
             window = new Rect(0, current_open_t - real_window_size, Screen.width, real_window_size);
 
-            // Set background color
             Texture2D background_texture = new Texture2D(1, 1);
             background_texture.SetPixel(0, 0, BackgroundColor);
             background_texture.Apply();
@@ -267,11 +280,6 @@ namespace CommandTerminal
                 CursorToEnd();
                 move_cursor = false;
             }
-
-            //if (Event.current.Equals(Event.KeyboardEvent("escape")))
-            //{
-            //    SetState(TerminalState.Close);
-            //}
             else if (Event.current.Equals(Event.KeyboardEvent("return")))
             {
                 EnterCommand();
@@ -285,14 +293,6 @@ namespace CommandTerminal
             {
                 command_text = History.Next();
             }
-            //else if (Event.current.Equals(Event.KeyboardEvent(ToggleHotkey)))
-            //{
-            //    ToggleState(TerminalState.OpenSmall);
-            //}
-            //else if (Event.current.Equals(Event.KeyboardEvent(ToggleFullHotkey)))
-            //{
-            //    ToggleState(TerminalState.OpenFull);
-            //}
             else if (Event.current.Equals(Event.KeyboardEvent("tab")))
             {
                 CompleteCommand();
