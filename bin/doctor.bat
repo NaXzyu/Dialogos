@@ -3,7 +3,8 @@ chcp 65001 >nul
 
 set BIN_PATH=%~dp0
 set ROOT_PATH=%BIN_PATH%..
-set PROJ_NAME=DialogosEngine
+set ENV_NAME=Dialogos
+set PROJ_NAME=%ENV_NAME%Engine
 set MINICONDA_PATH=%ROOT_PATH%\miniconda\
 set CONDA_BIN_PATH=%MINICONDA_PATH%condabin\
 set CONDA_CMD=%CONDA_BIN_PATH%conda
@@ -11,12 +12,25 @@ set SETUP_FILE=%BIN_PATH%setup.bat
 set RUN_FILE=%BIN_PATH%run.py
 set /a ERROR_COUNT=0
 
+if "%1"=="--help" (
+	echo.
+    echo Usage: doctor.bat [OPTION]
+    echo.
+    echo Options:
+    echo   --check    Check the current setup for any issues.
+    echo   --fix      Attempt to fix any issues found in the setup.
+    echo   --help     Display this help message and exit.
+    echo.
+    exit /b
+)
+
 echo.
 call :check_project_folder
 call :check_miniconda_folder
 call :check_conda_folder
 call :check_run_folder
 call :report
+exit /b
 
 if "%1"=="--check" (
     goto :report
@@ -47,9 +61,9 @@ if not exist %MINICONDA_PATH% (
 goto :eof
 
 :check_conda_folder
-call %CONDA_CMD% info --envs | findstr /C:"%PROJ_NAME%" >nul 2>nul
+call %CONDA_CMD% info --envs | findstr /C:"%ENV_NAME%" >nul 2>nul
 if errorlevel 1 (
-    echo 🚫 Conda environment not activated: %PROJ_NAME%
+    echo 🚫 Conda environment not activated: %ENV_NAME%
     set /a ERROR_COUNT+=1
 ) 2>nul
 goto :eof
