@@ -1,4 +1,4 @@
-# Chapter 1: Setting Up the Environment
+# Chapter 1: Section 1: Setting Up the Environment
 
 ## 1.1 Introduction
 This chapter guides you through the initial setup required to begin working with the Dialogos LLM within the Unity environment. This includes preparing your system, importing necessary packages, and ensuring all prerequisites are met for a smooth development experience.
@@ -70,40 +70,69 @@ With the environment activated, you're now ready to proceed with ML-Agents devel
 
 > **Note**: The `run.bat` script, which starts the `run.py` Python script, is not covered in this chapter. It is used later in the workflow to initiate the ML-Agents training process.
 
-### 1.4.4 Summary
+### 1.4.4 Example Console Output
+The following text output is from a successful run of the setup.bat:
+
+```
+Downloading miniconda...
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 78.1M  100 78.1M    0     0  27.5M      0  0:00:02  0:00:02 --:--:-- 27.5M
+
+Installing miniconda...
+
+Creating the conda environment...
+Channels:
+ - conda-forge
+ - defaults
+Platform: win-64
+Collecting package metadata (repodata.json): ...working... done
+Solving environment: ...working... done
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+Channels:
+ - conda-forge
+ - defaults
+Platform: win-64
+Collecting package metadata (repodata.json): ...working... done
+Solving environment: ...working... done
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+no change     C:\Users\User\Unity\Dialogos\miniconda\Scripts\conda.exe
+no change     C:\Users\User\Unity\Dialogos\miniconda\Scripts\conda-env.exe
+no change     C:\Users\User\Unity\Dialogos\miniconda\Scripts\conda-script.py
+no change     C:\Users\User\Unity\Dialogos\miniconda\Scripts\conda-env-script.py
+no change     C:\Users\User\Unity\Dialogos\miniconda\condabin\conda.bat
+no change     C:\Users\User\Unity\Dialogos\miniconda\Library\bin\conda.bat
+no change     C:\Users\User\Unity\Dialogos\miniconda\condabin\_conda_activate.bat
+no change     C:\Users\User\Unity\Dialogos\miniconda\condabin\rename_tmp.bat
+no change     C:\Users\User\Unity\Dialogos\miniconda\condabin\conda_auto_activate.bat
+no change     C:\Users\User\Unity\Dialogos\miniconda\condabin\conda_hook.bat
+no change     C:\Users\User\Unity\Dialogos\miniconda\Scripts\activate.bat
+no change     C:\Users\User\Unity\Dialogos\miniconda\condabin\activate.bat
+no change     C:\Users\User\Unity\Dialogos\miniconda\condabin\deactivate.bat
+modified      C:\Users\User\Unity\Dialogos\miniconda\Scripts\activate
+modified      C:\Users\User\Unity\Dialogos\miniconda\Scripts\deactivate
+modified      C:\Users\User\Unity\Dialogos\miniconda\etc\profile.d\conda.sh
+modified      C:\Users\User\Unity\Dialogos\miniconda\etc\fish\conf.d\conda.fish
+no change     C:\Users\User\Unity\Dialogos\miniconda\shell\condabin\Conda.psm1
+modified      C:\Users\User\Unity\Dialogos\miniconda\shell\condabin\conda-hook.ps1
+no change     C:\Users\User\Unity\Dialogos\miniconda\Lib\site-packages\xontrib\conda.xsh
+modified      C:\Users\User\Unity\Dialogos\miniconda\etc\profile.d\conda.csh
+no change     C:\Users\User\OneDrive\Documents\WindowsPowerShell\profile.ps1
+
+==> For changes to take effect, close and re-open your current shell. <==
+
+(base) PS C:\Users\User\Unity\Dialogos>
+```
+### 1.4.5 Summary
 These automation scripts make setting up the ML-Agents Toolkit hassle-free, allowing you to focus on agent development and training.
 
 ## 1.5 High-Level Scripts and Configuration
-To facilitate the development process, we provide high-level scripts such as `engine.ini`, `clean.bat`, and `doctor.bat`. These scripts are designed to configure, maintain, and troubleshoot the project environment efficiently.
-
-### 1.5.1 The `engine.ini` Configuration File
-
-The `engine.ini` file serves as the central configuration for the Dialogos LLM project. It specifies preferences, paths, and options for the training environment.
-
-#### Usage
-- **Language and Complexity**: Set your language preference and the complexity level of the LLM training.
-- **Paths**: Define paths to training folders, results, and model directories.
-- **Options**: Configure training instances, encryption, and tokenization options.
-
-#### Advanced Configuration
-- **Dataset Properties**: Customize properties related to the dataset such as size, diversity, and sampling rate.
-- **Directory Management**: Specify the directory structure for organizing training data, checkpoints, and logs.
-- **Training Options**: Set high-level training parameters including batch size, learning rate, and epoch count.
-
-### 1.5.2 The `clean.bat` Script
-The `clean.bat` script resets the repository to its original state, removing any temporary files or configurations that were created during development.
-
-#### Capabilities
-- **Clean Slate**: Brings the project back to its initial setup.
-- **Remove Artifacts**: Clears build artifacts and temporary files.
-
-#### Example Usage
-To use the `clean.bat` script, navigate to the root directory of your project in the command prompt and execute the script:
-
-```bat
-cd path\to\your\project
-clean.bat
-```
+To facilitate the development process, we provide high-level scripts such as `doctor.bat`, `clean.bat`, and `engine.ini`. These scripts are designed to configure, maintain, and troubleshoot the project environment efficiently.
 
 ### 1.5.3 The `doctor.bat` Script
 The `doctor.bat` script is a troubleshooting tool that checks the environment for common issues and attempts to resolve them automatically.
@@ -121,43 +150,93 @@ cd path\to\your\project
 doctor.bat
 ```
 
+#### Example Ouput
+The following text output is an example of what the doctor will output if everything is okay:
+
+```
+(base) PS C:\Users\User\Unity\Dialogos> .\bin\doctor.bat
+
+✅ Everything is set up correctly 🎭
+
+(base) PS C:\Users\User\Unity\Dialogos>
+```
+
 This script will perform a series of checks to ensure your development environment is correctly set up, all dependencies are properly installed, and will attempt to automatically fix any issues it detects.
 
-### 1.5.4 Summary
+However if there are errors, for example lets just remove the miniconda direction from our project root if you previously setup for testing sake. The following output would reflect the new output if various files or directories are missing. 
+
+```
+(base) PS C:\Users\3nigma\Unity\Dialogos> .\bin\doctor.bat
+
+🚫 Project folder not found: C:\Users\User\Unity\Dialogos\bin\..\Dialogos
+🚫 Miniconda folder not found: C:\Users\User\Unity\Dialogos\bin\..\miniconda\
+The system cannot find the path specified.
+🚫 Conda environment not activated: Dialogos
+
+(base) PS C:\Users\User\Unity\Dialogos>
+```
+In the case of errors, the doctor can not only diagnose but also be able to fix your problem. Be advised you must consent to fix before proceding. You can run the fix by executing the following command:
+
+```
+doctor.bat --fix
+```
+
+should output the following consent for fix
+
+```
+(base) PS C:\Users\3nigma\Unity\Dialogos> .\bin\doctor.bat --fix
+
+🚫 Project folder not found: C:\Users\3nigma\Unity\Dialogos\bin\..\Dialogos
+🚫 Miniconda folder not found: C:\Users\3nigma\Unity\Dialogos\bin\..\miniconda\
+The system cannot find the path specified.
+🚫 Conda environment not activated: Dialogos
+🚫 There were 3 errors in the installation and setup of the previous batch file.
+Please press any key to begin the healing process.
+Press any key to continue . . .
+```
+
+This is an important step of integrating human decision making into critical processes such as self repair or self replication. This provides a more ethical mechanism for software maintance. You may however disable this feature within the `engine.ini`. (See section below)
+
+### 1.5.4 The `clean.bat` Script
+The `clean.bat` script resets the repository to its original state, removing any temporary files or configurations that were created during development.
+
+#### Capabilities
+- **Clean Slate**: Brings the project back to its initial setup.
+- **Remove Artifacts**: Clears build artifacts and temporary files.
+
+#### Example Usage
+To use the `clean.bat` script, navigate to the root directory of your project in the command prompt and execute the script:
+
+```bat
+cd path\to\your\project
+clean.bat
+```
+
+#### Example Ouput
+The following text output is from a successful clean of our project directories and files. Returning your project to square one.
+
+```
+(base) PS C:\Users\User\Unity\Dialogos> .\bin\clean.bat
+
+🚮 Starting cleanup process...
+✅ Cleanup process completed 🎭
+
+(base) PS C:\Users\User\Unity\Dialogos>
+```
+
+### 1.5.5 The `engine.ini` Configuration File
+
+The `engine.ini` file serves as the central configuration for the Dialogos LLM project. It specifies preferences, paths, and options for the training environment.
+
+#### Usage
+- **Language and Complexity**: Set your language preference and the complexity level of the LLM training.
+- **Paths**: Define paths to training folders, results, and model directories.
+- **Options**: Configure training instances, encryption, and tokenization options.
+
+#### Advanced Configuration
+- **Dataset Properties**: Customize properties related to the dataset such as size, diversity, and sampling rate.
+- **Directory Management**: Specify the directory structure for organizing training data, checkpoints, and logs.
+- **Training Options**: Set high-level training parameters including batch size, learning rate, and epoch count.
+
+### 1.5.6 Summary
 These high-level scripts are powerful tools that streamline the development workflow. Users are encouraged to familiarize themselves with these scripts to leverage their full potential. Support for Linux and macOS scripts is coming soon.
-
-## 1.6 Preparing the Unity Scene
-A Unity scene is where you design your game or simulation's environment. It's essential to set up the scene correctly for training your agents.
-
-### 1.6.1 Scene Creation
-- Navigate to the Unity Editor.
-- Create a new scene dedicated to the LLM.
-
-### 1.6.2 Scene Configuration
-- Ensure the scene includes all necessary objects and configurations for agent training.
-- Set up lighting, physics, and any other components that will interact with your agents.
-
-## 1.7 Creating Agents
-Agents are entities within your environment that will learn and perform tasks.
-
-### 1.7.1 Agent Prefabs
-- Access the Unity Hierarchy window.
-- Instantiate new agent prefabs in the scene.
-
-### 1.7.2 Agent Design
-- Design agents with capabilities to perceive the environment and seek rewards.
-- Attach sensors and actuators to the agents.
-
-## 1.8 Writing Configuration Files
-Configuration files define the training parameters for your agents.
-
-### 1.8.1 trainer_config.yaml
-- Create a `trainer_config.yaml` file in your project directory.
-- Define hyperparameters such as batch size, buffer size, and learning rate.
-
-### 1.8.2 Python Environment
-- Set up a Python environment to work with the ML-Agents toolkit.
-- Use the `mlagents-learn` command to initiate training.
-
-## 1.9 Summary
-By the end of this chapter, you should have a fully prepared environment within Unity, ready for the development and training of your Dialogos LLM agents. The next chapter will delve into the design and interaction of these agents, setting the stage for their learning journey.
