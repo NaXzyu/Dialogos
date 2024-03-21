@@ -4,7 +4,7 @@ chcp 65001 >nul
 
 set BIN=%~dp0
 set ROOT=%BIN%..\
-set PROJ=Dialogos
+set PROJ=DialogosEngine
 set MINI=miniconda
 set LOGS=Logs
 set ML=ml-agents
@@ -34,7 +34,7 @@ if exist %1 (
   for /d %%d in (%1*) do (
     rd /s /q %%d
   )
-  echo %2 removed successfully.
+  echo & echo.& echo %2 removed successfully.
 ) else (
   echo %2 not found or already removed. > nul
 )

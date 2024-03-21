@@ -52,11 +52,11 @@ def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 def display_text():
-    rich_console.print(graffiti_text("Neko Cat Game"), style="red")
+    rich_console.print(graffiti_text("DIAL0G0S"), style="red")
 
 def display_rainbow_text():
     rich_console.print(
-        Text("=^_^=  =^_^=  C A T  G A M E  R E S E A R C H  =^_^=  N E K O  C A T  G A M E  =^_^=  =^_^=\n"))
+        Text("- - - - - = = = N A X Z Y U = - = D I A L 0 G 0 S = = = - - - - -\n"))
 
 def display_dashes():
     rich_console.print("-" * num_dashes, style="white")

@@ -11,9 +11,10 @@ goto :eof
 :set_variables
 set BIN=%~dp0
 set ROOT=%BIN%..\
-set PROJ=Dialogos
+set ENV_NAME=Dialogos
 set ENV_FILE=environment.yml
-set ENV=%ROOT%%ENV_FILE%
+set PROJ_NAME=%ENV_NAME%Engine
+set ENV_PATH=%ROOT%%ENV_FILE%
 set MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
 set MINICONDA=miniconda
 set MINICONDA_EXE=%MINICONDA%.exe
@@ -47,8 +48,8 @@ goto :eof
 
 :create_conda_env
 echo Creating the conda environment...
-call %CONDA% env create -n %PROJ% -f %ENV% --quiet
+call %CONDA% env create -n %PROJ_NAME% -f %ENV_PATH% --quiet
 call %CONDA% init powershell
-call %MINICONDA_PATH%\Scripts\activate %PROJ%
+call %MINICONDA_PATH%\Scripts\activate %PROJ_NAME%
 echo.
 goto :eof
