@@ -34,7 +34,7 @@ if exist %1 (
   for /d %%d in (%1*) do (
     rd /s /q %%d
   )
-  echo & echo.& echo %2 removed successfully.
+  echo %2 removed successfully.
 ) else (
   echo %2 not found or already removed. > nul
 )

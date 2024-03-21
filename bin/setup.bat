@@ -48,7 +48,7 @@ goto :eof
 
 :create_conda_env
 echo Creating the conda environment...
-call %CONDA% env create -n %PROJ_NAME% -f %ENV_PATH% --quiet
+call %CONDA% env create -n %ENV_NAME% -f %ENV_PATH% --quiet
 call %CONDA% init powershell
 call %MINICONDA_PATH%\Scripts\activate %PROJ_NAME%
 echo.
