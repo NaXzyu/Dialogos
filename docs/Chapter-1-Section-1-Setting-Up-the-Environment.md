@@ -22,10 +22,11 @@ Our scripts simplify the ML-Agents Toolkit installation by:
 - **Miniconda Installation**: Installing Miniconda, a minimal installer for conda.
 - **Environment Setup**: Setting up a new conda environment tailored for ML-Agents development.
 
-### 1.4.2 Cloning ML-Agents
-The automation continues with cloning the ML-Agents repository:
-- **Develop Branch**: Cloning the `develop` branch by default.
-- **Post Mortem Branches**: Cloning a specific branch for post-mortem projects.
+### 1.4.2 Cloning ML-Agents and DialogosEngine
+The automation continues with cloning the repositories required for the project:
+- **Develop Branch**: Cloning the `develop` branch of ML-Agents by default.
+- **DialogosEngine Submodule**: Including the DialogosEngine as a submodule to ensure seamless integration and updates.
+- **Post Mortem Branches**: Cloning a specific branch for post-mortem projects when necessary.
 
 ### 1.4.3 Installation Process
 
