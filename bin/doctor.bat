@@ -16,13 +16,16 @@ call :check_project_folder
 call :check_miniconda_folder
 call :check_conda_folder
 call :check_run_folder
+call :report
+
+if "%1"=="--check" (
+    goto :report
+)
 
 :fix_errors
 if "%1"=="--fix" (
     if %ERROR_COUNT% gtr 0 (
         echo 🚫 There were %ERROR_COUNT% errors in the installation and setup of the previous batch file.
-        echo Please press any key to begin the healing process.
-        pause
         call %SETUP_FILE%
         echo.
     )
@@ -58,11 +61,27 @@ if not exist %RUN_FILE% (
 ) 2>nul
 goto :eof
 
-:exit
+:report
 if %ERROR_COUNT% equ 0 (
     echo ✅ Everything is set up correctly 🎭
+) else (
+    echo 🚫 There are %ERROR_COUNT% issues detected with the setup.
 )
 echo.
+echo    Current Batch File Variables:
+echo        BIN_PATH=%BIN_PATH%
+echo        ROOT_PATH=%ROOT_PATH%
+echo        PROJ_NAME=%PROJ_NAME%
+echo        MINICONDA_PATH=%MINICONDA_PATH%
+echo        CONDA_BIN_PATH=%CONDA_BIN_PATH%
+echo        CONDA_CMD=%CONDA_CMD%
+echo        SETUP_FILE=%SETUP_FILE%
+echo        RUN_FILE=%RUN_FILE%
+echo        ERROR_COUNT=%ERROR_COUNT%
+echo.
+goto :exit
+
+:exit
 exit /b %ERROR_COUNT%
 
 :eof

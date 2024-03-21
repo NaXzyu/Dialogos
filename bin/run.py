@@ -56,7 +56,7 @@ def display_text():
 
 def display_rainbow_text():
     rich_console.print(
-        Text("- - - - - = = = N A X Z Y U = - = D I A L 0 G 0 S = = = - - - - -\n"))
+        Text("- - - - = = = N A X Z Y U = - = D I A L 0 G 0 S = = = - - - -\n"))
 
 def display_dashes():
     rich_console.print("-" * num_dashes, style="white")
