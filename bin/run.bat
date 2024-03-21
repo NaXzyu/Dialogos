@@ -26,15 +26,15 @@ if not exist "%ROOT%miniconda\Scripts\conda.exe" (
 )
 
 call %ROOT%miniconda\Scripts\conda init powershell
-echo 🐍 Activating Conda environment '%PROJ_NAME%'...
-call %ROOT%miniconda\Scripts\activate %PROJ_NAME%
+echo 🐍 Activating Conda environment '%ENV_NAME%'...
+call %ROOT%miniconda\Scripts\activate %ENV_NAME%
 
 python -c "import art" 2>nul || (
     if %SILENT_MODE% == 1 (
         call "%BIN%setup.bat"
         exit /b
     ) else (
-        echo The 'art' module is not installed in the '%PROJ_NAME%' environment.& echo.& echo Please press any key to run setup.bat to install required dependencies.
+        echo The 'art' module is not installed in the '%ENV_NAME%' environment.& echo.& echo Please press any key to run setup.bat to install required dependencies.
         pause >nul
         call "%BIN%setup.bat"
         exit /b
