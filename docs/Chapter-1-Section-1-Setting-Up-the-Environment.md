@@ -135,7 +135,51 @@ These automation scripts make setting up the ML-Agents Toolkit hassle-free, allo
 ## 1.5 High-Level Scripts and Configuration
 To facilitate the development process, we provide high-level scripts such as `doctor.bat`, `clean.bat`, and `engine.ini`. These scripts are designed to configure, maintain, and troubleshoot the project environment efficiently.
 
-### 1.5.3 The `doctor.bat` Script
+### 1.5.3 The `run.bat` and `run.py` Scripts
+
+The `run.bat` script is a simple yet crucial component of the Dialogos LLM project. It sets up the environment, activates the necessary Conda environment, and executes the `run.py` script, which is responsible for various automation tasks within the project.
+
+#### Capabilities
+- **Environment Setup**: Initializes and activates the Conda environment specific to the project.
+- **Script Execution**: Runs the `run.py` script, which can include dynamic console outputs during tasks like downloading Miniconda.
+
+#### Example Usage
+To use the `run.bat` script, navigate to the root directory of your project in the command prompt and execute the script:
+
+```bat
+cd path\to\your\project
+run.bat
+```
+
+For a silent installation that does not prompt for any key presses, use the `--silent` argument:
+
+```bat
+cd path\to\your\project
+run.bat --silent
+```
+
+This will automatically download and install Miniconda if it is not already installed, without any interactive prompts.
+
+#### Example Output
+The output will include dynamic console messages as the `run.py` script executes. Here's an example of what you might see when running the script:
+
+```
+(base) PS C:\Users\User\Unity\Dialogos> .\bin\run.bat
+
+🔄 Initializing environment...
+🐍 Activating Conda environment 'DialogosEngine'...
+📥 Downloading Miniconda...
+✅ Environment setup and script execution completed.
+
+(base) PS C:\Users\User\Unity\Dialogos>
+```
+
+#### Integration with Unity
+The `run.bat` script can also be called from within Unity using a MonoBehaviour script. This allows for seamless integration of the script's functionality into the Unity editor, enabling developers to run Python scripts and manage Conda environments without leaving the Unity environment.
+
+**Note**: Ensure that the paths and environment variables set in the batch file are accessible and correctly configured on the machine running the Unity project.
+
+### 1.5.4 The `doctor.bat` Script
 The `doctor.bat` script is a troubleshooting tool that checks the environment for common issues and attempts to resolve them automatically.
 
 #### Features
@@ -198,7 +242,7 @@ Press any key to continue . . .
 
 This is an important step of integrating human decision making into critical processes such as self repair or self replication. This provides a more ethical mechanism for software maintance. You may however disable this feature within the `engine.ini`. (See section below)
 
-### 1.5.4 The `clean.bat` Script
+### 1.5.5 The `clean.bat` Script
 The `clean.bat` script resets the repository to its original state, removing any temporary files or configurations that were created during development.
 
 #### Capabilities
@@ -225,7 +269,7 @@ The following text output is from a successful clean of our project directories 
 (base) PS C:\Users\User\Unity\Dialogos>
 ```
 
-### 1.5.5 The `engine.ini` Configuration File
+### 1.5.6 The `engine.ini` Configuration File
 
 The `engine.ini` file serves as the central configuration for the Dialogos LLM project. It specifies preferences, paths, and options for the training environment.
 
@@ -239,5 +283,5 @@ The `engine.ini` file serves as the central configuration for the Dialogos LLM p
 - **Directory Management**: Specify the directory structure for organizing training data, checkpoints, and logs.
 - **Training Options**: Set high-level training parameters including batch size, learning rate, and epoch count.
 
-### 1.5.6 Summary
+### 1.5.7 Summary
 These high-level scripts are powerful tools that streamline the development workflow. Users are encouraged to familiarize themselves with these scripts to leverage their full potential. Support for Linux and macOS scripts is coming soon.
