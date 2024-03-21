@@ -4,8 +4,8 @@
 
 Integrated with **Unity**, Dialogos promises an immersive journey, transforming language learning into an adventure beyond the ordinary. 🌐✨
 
-- **Innovative Fusion**: Merging Unity's mighty tools, Dialogos crafts vibrant language adventures that captivate and educate. 🛠️📈
-- **AI Supercharged**: With top-tier AI, Dialogos offers instant language insights, making mastery natural and swift. 🧠⚡
+- **Innovative Fusion**: With Unity's mighty tools, Dialogos crafts vibrant language that captivate and educate. 🛠️📈
+- **AI Supercharged**: Top-tier AI, Dialogos offers instant language insights, making mastery natural and swift. 🧠⚡
 - **Playful Learning**: Dive into game-like quests and unlock the joys of languages with Dialogos. 🎮🏆
 - **Tech for All**: Dialogos is your friendly gateway to sophisticated language learning for everyone. 🌟👥
 
