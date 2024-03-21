@@ -1,3 +1,14 @@
+```
+  _____  _       _
+ |  __ \(_)     | |
+ | |  | |_  __ _| | ___   __ _  ___  ___
+ | |  | | |/ _` | |/ _ \ / _` |/ _ \/ __|
+ | |__| | | (_| | | (_) | (_| | (_) \__ \
+ |_____/|_|\__,_|_|\___/ \__, |\___/|___/
+                          __/ |                               
+                         |___/                                
+```
+
 # 🎭 Dialogos: A New Era in AI Communication
 
 **Dialogos** represents the forefront of language model technology, poised to transform the way we interact with artificial intelligence. The term itself is steeped in history, originating from the ancient Greek word "διάλογος," which translates to a "flow of words" or "conversation." This concept was central to the classical Greek philosophical method, particularly associated with Socrates, who championed the pursuit of truth and wisdom through rigorous dialogue.
