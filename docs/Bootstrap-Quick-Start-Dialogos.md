@@ -1,4 +1,4 @@
-# Dialogos Project Bootstrap Guide
+# Dialogos Project Bootstrap Guide 
 
 Welcome to the Dialogos Project Bootstrap Guide. This document outlines the sequence of operations performed during the bootstrap process of our Unity application.
 
