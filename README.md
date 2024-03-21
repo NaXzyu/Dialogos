@@ -29,6 +29,8 @@ Dialogos is designed to be a friendly gateway to sophisticated language learning
 
 Embark on the Dialogos odyssey—where language learning meets tech, empowering you to conquer new linguistic horizons while savoring the voyage! With Dialogos, the world of languages is just a conversation away.
 
+---
+
 ## 🚀 Getting Started with Dialogos
 
 Embark on your journey with Dialogos by cloning the cosmos of code into your local universe:
@@ -39,7 +41,7 @@ cd Dialogos-LLM
 # Unfold the mysteries of setup with our guiding documentation
 ```
 
-## 🛠 How to Use Dialogos
+## How to Use Dialogos
 
 Dive into the heart of Dialogos with this snippet, a glimpse into the art of conversational AI:
 
@@ -47,15 +49,15 @@ Dive into the heart of Dialogos with this snippet, a glimpse into the art of con
 // Example code to initialize and engage with your Dialogos model
 ```
 
-## 🤝 Community Contributions
+## Community Contributions
 
 Join the odyssey of innovation! Your insights and code are the keystones of our collective masterpiece.
 
-## 📜 License
+## License
 
 Dialogos is a beacon of open-source freedom, shared with the world under the MIT License. Find the legal alchemy within the `LICENSE` file.
 
-## 🌐 Connect with the Pioneers
+## Connect with the Pioneers
 
 Forge connections with the minds behind Dialogos:
 p3nGu1nZz - [@p3ngu1nzz](https://twitter.com/p3ngu1nzz)
