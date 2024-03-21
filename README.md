@@ -24,7 +24,7 @@ Join the Dialogos journey—where cutting-edge tech meets the art of language, e
 Embark on your journey with Dialogos by integrating the constellation of code into your etheral digital realm:
 
 ```bash
-git clone https://github.com/p3nGu1nZz/Dialogos.git
+git clone https://github.com/p3nGu1nZz/Dialogos.git --recurse-submodules
 cd Dialogos
 # Unravel the mysteries of installation with our comprehensive guides
 ```
