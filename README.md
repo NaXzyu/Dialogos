@@ -29,7 +29,7 @@ cd Dialogos
 # Unravel the mysteries of installation with our comprehensive guides
 ```
 
-Be sure to read our Getting Started Bootstrap Guide (todo:link)
+After restarting your console, please read our Getting Started Bootstrap Guide (todo:link) for detailed information on this process and how to use it properly.
 
 ## How to Use Dialogos
 
