@@ -1,4 +1,4 @@
-# Dialogos-LLM Project Documentation
+# Dialogos LLM Project Documentation
 
 ## Table of Contents
 
