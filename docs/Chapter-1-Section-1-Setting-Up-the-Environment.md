@@ -177,7 +177,9 @@ The system cannot find the path specified.
 ```
 In the case of errors, the doctor can not only diagnose but also be able to fix your problem. Be advised you must consent to fix before proceding. You can run the fix by executing the following command:
 
-`doctor.bat --fix`
+```
+doctor.bat --fix
+```
 
 should output the following consent for fix
 
@@ -194,7 +196,6 @@ Press any key to continue . . .
 ```
 
 This is an important step of integrating human decision making into critical processes such as self repair or self replication. This provides a more ethical mechanism for software maintance. You may however disable this feature within the `engine.ini`. (See section below)
-
 
 ### 1.5.4 The `clean.bat` Script
 The `clean.bat` script resets the repository to its original state, removing any temporary files or configurations that were created during development.
