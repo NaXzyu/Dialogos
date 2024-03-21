@@ -8,7 +8,6 @@ By leveraging the latest advancements in machine learning and natural language p
 
 In this way, Dialogos is more than a tool; it's a bridge between the past and the future, combining the wisdom of ancient philosophy with the innovation of contemporary technology to redefine our dialogue with AI.
 
-
 Integrated with **Unity**, Dialogos promises an immersive journey, transforming language learning into an adventure beyond the ordinary.
 
 ## Key Highlights
@@ -43,8 +42,8 @@ Embark on the Dialogos odyssey—where language learning meets tech, empowering 
 Begin your odyssey with Dialogos by replicating the constellation of code into your own terrestrial sphere:
 
 ```bash
-git clone https://github.com/p3nGu1nZz/Dialogos-LLM.git
-cd Dialogos-LLM
+git clone https://github.com/p3nGu1nZz/Dialogos.git
+cd Dialogos
 # Navigate the enigmas of installation with our illuminating manuals
 ```
 
@@ -78,7 +77,7 @@ Join the odyssey of innovation! Your insights and code are the keystones of our 
 
 ## License
 
-Dialogos is a beacon of open-source freedom, shared with the world under the MIT License. Find the legal alchemy within the `LICENSE` file.
+Dialogos is a completely free and open-source, shared with the world under the MIT License. Find the legal alchemy within the `LICENSE` file.
 
 ## Connect with the Pioneers
 
