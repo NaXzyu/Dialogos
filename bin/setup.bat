@@ -5,7 +5,6 @@ call :set_variables
 call :download_miniconda
 call :install_miniconda
 call :create_conda_env
-call :check_install
 endlocal
 goto :eof
 
@@ -52,9 +51,4 @@ call %CONDA% env create -n %PROJ% -f %ENV% --quiet
 call %CONDA% init powershell
 call %MINICONDA_PATH%\Scripts\activate %PROJ%
 echo.
-goto :eof
-
-:check_install
-echo Checking the installation...
-call %DOCTOR%
 goto :eof
