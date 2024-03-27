@@ -1,3 +1,6 @@
 [submodule "DialogosEngine"]
 	path = DialogosEngine
 	url = https://github.com/NaXzyu/DialogosEngine
+[submodule "DialogosBootloader"]
+	path = DialogosBootloader
+	url = https://github.com/NaXzyu/DialogosBootloader
