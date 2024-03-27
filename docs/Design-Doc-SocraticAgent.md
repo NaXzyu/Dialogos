@@ -27,11 +27,6 @@ The root StateChart manages the following states:
 - **Action Threshold**: A predefined threshold that determines when a state change should occur.
 - **Behavior Evaluation**: The reward system now includes mechanisms for evaluating new behaviors and their contribution to the agent's overall performance.
 
-## Development Tools
-- **Unity Hub**: Manages Unity project versions and installations.
-- **Visual Studio Code**: Codes the agent's behavior and FSM logic.
-- **Windows Tools**: Utilizes built-in Windows tools for debugging and performance monitoring.
-
 ## Implementation Steps
 1. **Define FSMs**: Create FSMs for different tasks and define their state contexts.
 2. **Implement StateChart**: Develop the root StateChart that manages the FSMs.
