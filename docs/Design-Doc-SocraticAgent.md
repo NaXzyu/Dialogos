@@ -1,5 +1,17 @@
 # SocraticAgent Design Document
 
+1. Introduction
+2. Architectural Overview
+3. Detailed Implementation Steps
+4. Agential State Outline
+5. Parellel State Machine (PSM)
+6. Multitasking and Concurrency
+7. Reward System Framework
+8  Persistent Memonics and State
+9. Inter-Communication for Properties
+10. State Communication and Property Sharing
+11. Conclusion
+
 ## Overview
 This document describes the design of the SocraticAgent, a sophisticated AI system for a game environment that utilizes a parallel processing architecture. Each state within the agent, known as a ParallelState, operates independently and concurrently, allowing for a dynamic and responsive AI that can adapt to complex scenarios in real-time.
 
@@ -9,7 +21,54 @@ This document describes the design of the SocraticAgent, a sophisticated AI syst
 - **SessionProperties**: A set of properties that can be shared across ParallelStates, allowing for coordinated actions and information exchange without concurrency issues.
 - **Action Potential**: A dynamic value associated with each ParallelState that determines its activation, ensuring the agent can adapt its focus and resources as needed.
 
-## Agent States
+## Architectural Outline
+
+The **Architectural Outline** provides a high-level view of the SocraticAgent's design, illustrating the interplay between various components that govern its behavior and decision-making processes. The outline showcases the **StateChart** as the central orchestrator, managing state transitions and interactions with the **MembraneLayer** for dynamic FSM control. The **Thread Proc.** column represents the threading mechanisms that enable concurrent processing, while the **Fibers** and **Jobs** columns depict the finer granularity of task management and execution.
+
+```text
++-------------------+     +-------------------+     +-------------------+
+|    StateChart     |     |    Thread Proc.   |     |       Fibers      |
+|-------------------|     |-------------------|     |-------------------|
+| -fsmDict          |     | -threadQueue      |     | -fiberGroup       |
+| -actThresh        |     | -semaphores       |     | -taskGrouping     |
+| -membLayer        |     | -coreAssignment   |     |-------------------|
+| -stateProp        |     |-------------------|     | +groupThreads()   |
+|-------------------|     | +scheduleJob()    |     +-------------------+
+| +updateStateChrt()|     | +manageThreads()  |              |
+| +updateState()    |     | +assignCore()     |             |
+| +addFSM()         |     +-------------------+             |
+| +removeFSM()      |             |                        |
++-------------------+             |                        |
+         |                        |                        |
++-------------------+     +-------------------+     +-------------------+
+|   MembraneLayer   |     |       Jobs        |     |    StateProperty  |
+|-------------------|     |-------------------|     |-------------------|
+|                   |     | -jobList          |     | -properties       |
+| +manageFSMs()     |     | -priority         |     |-------------------|
+|                   |     |-------------------|     | +setProperty()    |
++-------------------|     | +createJob()      |     | +getProperty()    |
+         |                | +executeJob()     |     +-------------------+
+         V                +-------------------+             |
++-------------------+             |                        |
+|        FSM        |             |                        |
+|-------------------|             |                        |
+| -currentState     |             |                        |
+|-------------------|             |                        |
+| +nextState()      |             |                        |
++-------------------+             |                        |
+         |                        |                        |
+         +-----------+------------+------------+-----------+
+                     |                         |
++-------------------+-------------------------+-------------------+
+|                              States                            |
+|----------------------------------------------------------------|
+| 1. Observe  2. Orient  3. Decide  4. Act  5. Learn             |
+|----------------------------------------------------------------|
+| +transitionLogic()                                             |
++----------------------------------------------------------------+
+```
+
+## Agential States
 
 The SocraticAgent's functionality is encapsulated within a Parallel State Machine, where each state operates independently and concurrently. The states are activated based on their respective action potentials, allowing the agent to adaptively manage its focus and resources. The states, in their operational sequence, are as follows:
 
@@ -81,76 +140,26 @@ The SocraticAgent's performance is driven by an optimized reward signal framewor
 - **Behavioral Analytics**: The enhanced reward system incorporates sophisticated analytics to assess new behaviors, examining their effectiveness and alignment with the agent's objectives.
 - **Performance Metrics**: It quantifies the impact of behaviors on the agent's overall performance, using a variety of metrics to ensure a balanced evaluation.
 
-## Overview of PSM Implementation
+## Persistent Memory for StateProperties
 
-The implementation of the Parallel State Machine (PSM) is a structured process designed to integrate sophisticated AI capabilities into the game environment. This process ensures that the SocraticAgent can manage multiple tasks concurrently, adapt to new challenges, and learn from its experiences. Below is an organized breakdown of the implementation steps.
+As the SocraticAgent evolves and interacts within the game environment, it accumulates a wealth of experience that can be leveraged for future decision-making. To harness this valuable data, we introduce a system for persistent memory storage, specifically designed for **StateProperties**. This system will enable the agent to store and recall accumulated knowledge, facilitating continuous learning and improvement over time.
 
-### Task Identification and PSM Creation
+### Concept of Persistent Memory
 
-The first phase involves identifying the tasks the agent will perform and creating dedicated PSMs for each task. These PSMs are equipped with their own states and transitions, tailored to the specific requirements of each task.
+Persistent memory refers to the ability of the agent to retain information across different sessions or episodes. This is akin to a human's long-term memory, where past experiences inform present actions. For the SocraticAgent, this means remembering the outcomes of previous decisions and using that knowledge to make more informed choices in the future.
 
-### Framework Development and Integration
+### Role of StateProperties in Memory
 
-A central framework is developed to manage all PSMs, featuring systems to track and update the state of each PSM and handle dynamic creation and removal. This framework is then integrated into the game's runtime environment, establishing communication channels for data exchange between the PSMs and game systems.
+**StateProperties** play a crucial role in this process, as they contain the data that the agent needs to remember. By storing these properties persistently, the agent can reference past states and the context in which decisions were made, leading to a more nuanced understanding of the game environment.
 
-### Testing, Iteration, and Dynamic Management
+### Implementation Strategy
 
-Rigorous testing and iteration are conducted to ensure correct state transitions and actions. A membrane layer is implemented for dynamic PSM management, overseeing the performance of PSMs and facilitating the creation of new PSMs for emerging behaviors or tasks, as well as the removal of underperforming PSMs.
+The implementation of persistent memory will involve storing **StateProperties** in a binary format, which is both space-efficient and fast to access. This approach ensures that the agent's memory footprint is minimized while allowing for quick retrieval of information when needed.
 
-### Synchronization, Concurrency, and Reward Optimization
+### Benefits of Persistent Memory
 
-Synchronization mechanisms are designed to ensure PSMs operate in harmony without conflicts, and concurrency is optimized for efficiency. The reward system and behavior evaluation are refined to reinforce beneficial behaviors and assess their impact on the agent's overall goals.
+With persistent memory, the SocraticAgent's capacity for learning and adaptation is significantly enhanced. It can develop a historical context, recognize patterns over time, and avoid repeating past mistakes. This leads to a more sophisticated AI that can grow and adapt alongside the game it inhabits.
 
-### Final Integration and Comprehensive Testing
-
-The final phase involves a full integration test of the PSM framework within the game environment, stress tests to evaluate performance under various scenarios, and final adjustments based on comprehensive testing results and user feedback.
-
-## Architectural Outline
-
-The **Architectural Outline** provides a high-level view of the SocraticAgent's design, illustrating the interplay between various components that govern its behavior and decision-making processes. The outline showcases the **StateChart** as the central orchestrator, managing state transitions and interactions with the **MembraneLayer** for dynamic FSM control. The **Thread Proc.** column represents the threading mechanisms that enable concurrent processing, while the **Fibers** and **Jobs** columns depict the finer granularity of task management and execution.
-
-```text
-+-------------------+     +-------------------+     +-------------------+
-|    StateChart     |     |    Thread Proc.   |     |       Fibers      |
-|-------------------|     |-------------------|     |-------------------|
-| -fsmDict          |     | -threadQueue      |     | -fiberGroup       |
-| -actThresh        |     | -semaphores       |     | -taskGrouping     |
-| -membLayer        |     | -coreAssignment   |     |-------------------|
-| -stateProp        |     |-------------------|     | +groupThreads()   |
-|-------------------|     | +scheduleJob()    |     +-------------------+
-| +updateStateChrt()|     | +manageThreads()  |              |
-| +updateState()    |     | +assignCore()     |             |
-| +addFSM()         |     +-------------------+             |
-| +removeFSM()      |             |                        |
-+-------------------+             |                        |
-         |                        |                        |
-+-------------------+     +-------------------+     +-------------------+
-|   MembraneLayer   |     |       Jobs        |     |    StateProperty  |
-|-------------------|     |-------------------|     |-------------------|
-|                   |     | -jobList          |     | -properties       |
-| +manageFSMs()     |     | -priority         |     |-------------------|
-|                   |     |-------------------|     | +setProperty()    |
-+-------------------|     | +createJob()      |     | +getProperty()    |
-         |                | +executeJob()     |     +-------------------+
-         V                +-------------------+             |
-+-------------------+             |                        |
-|        FSM        |             |                        |
-|-------------------|             |                        |
-| -currentState     |             |                        |
-|-------------------|             |                        |
-| +nextState()      |             |                        |
-+-------------------+             |                        |
-         |                        |                        |
-         +-----------+------------+------------+-----------+
-                     |                         |
-+-------------------+-------------------------+-------------------+
-|                              States                            |
-|----------------------------------------------------------------|
-| 1. Observe  2. Orient  3. Decide  4. Act  5. Learn             |
-|----------------------------------------------------------------|
-| +transitionLogic()                                             |
-+----------------------------------------------------------------+
-```
 ## Inter-State Communication via StateProperties
 
 As we delve deeper into the SocraticAgent's architecture, it becomes imperative to address the mechanisms that enable seamless communication between states. The **StateProperties** object is pivotal in this regard, acting as a conduit for sharing data and ensuring states are synchronized without the need for costly memory operations. This section will explore the structure of the **StateProperties** object, the dynamics of state transitions, and the implementation of a messaging service designed to facilitate these interactions efficiently.
