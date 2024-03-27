@@ -25,25 +25,13 @@ Each state is designed to function autonomously, with its own set of StateProper
 
 The SocraticAgent's Parallel State Machine is composed of five distinct states, each with a specific role in the agent's interaction with the game environment. These states are designed to work both independently and collaboratively, ensuring a comprehensive and adaptive AI system.
 
-#### Observe
-- **Purpose**: The Observe state is responsible for gathering data from the environment. It serves as the agent's sensory input, collecting information that will inform subsequent states.
-- **Reward Handling**: Rewards in this state are given for the timely and accurate collection of relevant data. The agent is incentivized to focus on significant changes or events that require attention.
-
-#### Orient
-- **Purpose**: In the Orient state, the agent analyzes the data collected during the Observe state. It contextualizes the information to understand the current situation and identify potential opportunities or threats.
-- **Reward Handling**: The agent receives rewards for successful identification of actionable insights and patterns within the data. The complexity and accuracy of the analysis are key factors in the reward mechanism.
-
-#### Decide
-- **Purpose**: The Decide state is where the agent selects the most appropriate course of action based on the analysis provided by the Orient state. It involves weighing options and predicting outcomes.
-- **Reward Handling**: Decision-making is rewarded based on the quality and effectiveness of the chosen actions. Decisions that lead to positive outcomes yield higher rewards, encouraging the agent to make sound choices.
-
-#### Act
-- **Purpose**: The Act state is the execution phase where the agent carries out the actions determined in the Decide state. This state directly affects the game environment.
-- **Reward Handling**: Execution is rewarded for both the precision of the actions and their impact on the environment. Successful actions that contribute to achieving the agent's goals are highly rewarded.
-
-#### Learn
-- **Purpose**: The Learn state is a reflective phase where the agent assesses the outcomes of its actions and adapts its strategies accordingly. It is crucial for the agent's long-term improvement and adaptability.
-- **Reward Handling**: Learning is rewarded based on the agent's ability to improve its performance over time. The agent is encouraged to develop new strategies and avoid repeating ineffective behaviors.
+| State  | Purpose | Reward Handling |
+|--------|---------|-----------------|
+| Observe | The Observe state is responsible for gathering data from the environment. It serves as the agent's sensory input, collecting information that will inform subsequent states. | Rewards in this state are given for the timely and accurate collection of relevant data. The agent is incentivized to focus on significant changes or events that require attention. |
+| Orient | In the Orient state, the agent analyzes the data collected during the Observe state. It contextualizes the information to understand the current situation and identify potential opportunities or threats. | The agent receives rewards for successful identification of actionable insights and patterns within the data. The complexity and accuracy of the analysis are key factors in the reward mechanism. |
+| Decide | The Decide state is where the agent selects the most appropriate course of action based on the analysis provided by the Orient state. It involves weighing options and predicting outcomes. | Decision-making is rewarded based on the quality and effectiveness of the chosen actions. Decisions that lead to positive outcomes yield higher rewards, encouraging the agent to make sound choices. |
+| Act | The Act state is the execution phase where the agent carries out the actions determined in the Decide state. This state directly affects the game environment. | Execution is rewarded for both the precision of the actions and their impact on the environment. Successful actions that contribute to achieving the agent's goals are highly rewarded. |
+| Learn | The Learn state is a reflective phase where the agent assesses the outcomes of its actions and adapts its strategies accordingly. It is crucial for the agent's long-term improvement and adaptability. | Learning is rewarded based on the agent's ability to improve its performance over time. The agent is encouraged to develop new strategies and avoid repeating ineffective behaviors. |
 
 ## Parallel State Machine Overview
 
@@ -93,99 +81,85 @@ The SocraticAgent's performance is driven by an optimized reward signal framewor
 - **Behavioral Analytics**: The enhanced reward system incorporates sophisticated analytics to assess new behaviors, examining their effectiveness and alignment with the agent's objectives.
 - **Performance Metrics**: It quantifies the impact of behaviors on the agent's overall performance, using a variety of metrics to ensure a balanced evaluation.
 
-## Detailed Implementation Steps for Parallel State Machine
+## Overview of PSM Implementation
 
-1. **Define Parallel State Machines (PSMs)**
-   - Identify the various tasks the agent will perform within the game environment.
-   - For each task, create a dedicated PSM with its own states and transitions.
-   - Define the context and conditions for each state within the PSMs.
+The implementation of the Parallel State Machine (PSM) is a structured process designed to integrate sophisticated AI capabilities into the game environment. This process ensures that the SocraticAgent can manage multiple tasks concurrently, adapt to new challenges, and learn from its experiences. Below is an organized breakdown of the implementation steps.
 
-2. **Develop the Core Parallel State Machine Framework**
-   - Establish a central framework that will manage all PSMs.
-   - Implement a system to track and update the state of each PSM.
-   - Ensure that the core framework can handle dynamic creation and removal of PSMs.
+### Task Identification and PSM Creation
 
-3. **Integrate PSMs with Game Environment**
-   - Embed the PSM framework into the game's runtime environment.
-   - Connect each PSM to relevant game systems and events.
-   - Set up communication channels between PSMs and the game environment for data exchange.
+The first phase involves identifying the tasks the agent will perform and creating dedicated PSMs for each task. These PSMs are equipped with their own states and transitions, tailored to the specific requirements of each task.
 
-4. **Testing and Iteration**
-   - Unit test each PSM independently to ensure correct state transitions and actions.
-   - Integrate testing with the game environment to evaluate the PSMs' interactions with game systems.
-   - Collect performance data and user feedback for iterative improvements.
+### Framework Development and Integration
 
-5. **Implement Membrane Layer for Dynamic PSM Management**
-   - Develop a membrane layer that will oversee the PSMs, assessing their performance and relevance.
-   - Implement logic for the creation of new PSMs when novel behaviors or tasks are identified.
-   - Set up criteria for the removal of PSMs that are not contributing positively to the agent's performance.
+A central framework is developed to manage all PSMs, featuring systems to track and update the state of each PSM and handle dynamic creation and removal. This framework is then integrated into the game's runtime environment, establishing communication channels for data exchange between the PSMs and game systems.
 
-6. **Optimize PSM Synchronization and Concurrency**
-   - Design synchronization mechanisms to ensure PSMs operate in harmony without conflicts.
-   - Optimize the concurrent execution of PSMs to maximize efficiency and responsiveness.
+### Testing, Iteration, and Dynamic Management
 
-7. **Refine Reward System and Behavior Evaluation**
-   - Fine-tune the reward signals associated with each PSM to reinforce beneficial behaviors.
-   - Implement a comprehensive evaluation system to assess the impact of behaviors on the agent's overall goals.
+Rigorous testing and iteration are conducted to ensure correct state transitions and actions. A membrane layer is implemented for dynamic PSM management, overseeing the performance of PSMs and facilitating the creation of new PSMs for emerging behaviors or tasks, as well as the removal of underperforming PSMs.
 
-8. **Final Integration and Full System Testing**
-   - Perform a full integration test of the PSM framework with the game environment.
-   - Conduct stress tests to evaluate the system's performance under various scenarios.
-   - Make final adjustments based on comprehensive testing results and user feedback.
+### Synchronization, Concurrency, and Reward Optimization
 
-By following these detailed steps, the development of the Parallel State Machine will be structured and incremental, allowing for thorough testing and refinement at each stage.
+Synchronization mechanisms are designed to ensure PSMs operate in harmony without conflicts, and concurrency is optimized for efficiency. The reward system and behavior evaluation are refined to reinforce beneficial behaviors and assess their impact on the agent's overall goals.
 
-## Archectural  Outline
+### Final Integration and Comprehensive Testing
 
+The final phase involves a full integration test of the PSM framework within the game environment, stress tests to evaluate performance under various scenarios, and final adjustments based on comprehensive testing results and user feedback.
+
+## Architectural Outline
+
+The **Architectural Outline** provides a high-level view of the SocraticAgent's design, illustrating the interplay between various components that govern its behavior and decision-making processes. The outline showcases the **StateChart** as the central orchestrator, managing state transitions and interactions with the **MembraneLayer** for dynamic FSM control. The **Thread Proc.** column represents the threading mechanisms that enable concurrent processing, while the **Fibers** and **Jobs** columns depict the finer granularity of task management and execution.
+
+```text
++-------------------+     +-------------------+     +-------------------+
+|    StateChart     |     |    Thread Proc.   |     |       Fibers      |
+|-------------------|     |-------------------|     |-------------------|
+| -fsmDict          |     | -threadQueue      |     | -fiberGroup       |
+| -actThresh        |     | -semaphores       |     | -taskGrouping     |
+| -membLayer        |     | -coreAssignment   |     |-------------------|
+| -stateProp        |     |-------------------|     | +groupThreads()   |
+|-------------------|     | +scheduleJob()    |     +-------------------+
+| +updateStateChrt()|     | +manageThreads()  |              |
+| +updateState()    |     | +assignCore()     |             |
+| +addFSM()         |     +-------------------+             |
+| +removeFSM()      |             |                        |
++-------------------+             |                        |
+         |                        |                        |
++-------------------+     +-------------------+     +-------------------+
+|   MembraneLayer   |     |       Jobs        |     |    StateProperty  |
+|-------------------|     |-------------------|     |-------------------|
+|                   |     | -jobList          |     | -properties       |
+| +manageFSMs()     |     | -priority         |     |-------------------|
+|                   |     |-------------------|     | +setProperty()    |
++-------------------|     | +createJob()      |     | +getProperty()    |
+         |                | +executeJob()     |     +-------------------+
+         V                +-------------------+             |
++-------------------+             |                        |
+|        FSM        |             |                        |
+|-------------------|             |                        |
+| -currentState     |             |                        |
+|-------------------|             |                        |
+| +nextState()      |             |                        |
++-------------------+             |                        |
+         |                        |                        |
+         +-----------+------------+------------+-----------+
+                     |                         |
++-------------------+-------------------------+-------------------+
+|                              States                            |
+|----------------------------------------------------------------|
+| 1. Observe  2. Orient  3. Decide  4. Act  5. Learn             |
+|----------------------------------------------------------------|
+| +transitionLogic()                                             |
++----------------------------------------------------------------+
 ```
-+-------------------+     +-------------------+
-|    StateChart     |     |    Thread Proc.   |
-|-------------------|     |-------------------|
-| -fsmDict          |     | -threadQueue      |
-| -actThresh        |     | -semaphores       |
-| -membLayer        |     | -coreAssignment   |
-| -stateProp        |     |-------------------|
-|-------------------|     | +scheduleJob()    |
-| +updateStateChart()|     | +manageThreads()  |
-| +updateState()    |     | +assignCore()     |
-| +addFSM()         |     +-------------------+
-| +removeFSM()      |             |
-+-------------------+             |
-         |                        |
-+-------------------+     +-------------------+
-|   MembraneLayer   |     |       Fibers      |
-|-------------------|     |-------------------|
-|                   |     | -fiberGroup       |
-| +manageFSMs()     |     | -taskGrouping     |
-|                   |     |-------------------|
-+-------------------|     | +groupThreads()   |
-         |                        |
-+-------------------+     +-------------------+
-|    StateProperty  |     |       Jobs        |
-|-------------------|     |-------------------|
-| -properties       |     | -jobList          |
-|-------------------|     | -priority         |
-| +setProperty()    |     |-------------------|
-| +getProperty()    |     | +createJob()      |
-+-------------------+     | +executeJob()     |
-         |                +-------------------+
-         V                        |
-+-------------------+             |
-|        FSM        |             |
-|-------------------|             |
-| -currentState     |             |
-|-------------------|             |
-| +nextState()      |             |
-+-------------------+             |
-         |                        |
-         +-----------+------------+
-                     |
-+-------------------+-------------------+
-|               States                 |
-|--------------------------------------|
-| 1. Observe  2. Orient  3. Decide     |
-| 4. Act      5. Learn                 |
-|--------------------------------------|
-| +transitionLogic()                   |
-+--------------------------------------+
-```
+
+## Conclusion
+
+In summary, the development of the SocraticAgent's Parallel State Machine (PSM) represents a significant advancement in the realm of game AI. By employing a sophisticated architecture that allows for concurrent state management and dynamic task scheduling, the PSM ensures that the agent can handle complex, real-time interactions within the game environment with a high degree of autonomy and efficiency.
+
+The integration of Threads and Fibers within the PSM framework has introduced a new level of granularity in task execution, enabling the agent to perform multiple actions simultaneously while maintaining a cohesive goal-oriented behavior. The Membrane Layer's dynamic management of Finite State Machines (FSMs) further enhances the system's adaptability, allowing it to evolve in response to the agent's experiences and the ever-changing landscape of the game.
+
+Through rigorous testing and iterative development, the PSM has been refined to meet the demands of a fast-paced and unpredictable gaming world. The reward signal framework has been optimized to drive the agent towards achieving its objectives, ensuring that each action taken is a step towards success.
+
+As we look to the future, the continued evolution of the SocraticAgent's PSM will undoubtedly push the boundaries of what is possible in game AI. The foundation laid by this innovative system paves the way for more immersive and intelligent gameplay experiences, where AI agents can learn, adapt, and thrive in ways previously unimagined.
+
+We are excited to see how the SocraticAgent will continue to grow and redefine the standards of artificial intelligence in gaming. The journey thus far has been a testament to the creativity and ingenuity of our team, and we remain committed to exploring the vast potential of AI to create engaging and dynamic virtual worlds.
