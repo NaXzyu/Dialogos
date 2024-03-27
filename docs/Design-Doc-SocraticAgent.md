@@ -130,7 +130,7 @@ By intertwining Threads and Fibers with the existing Parallel State Machine, the
 
 ## Optimized Reward Signal Framework
 
-The SocraticAgent's performance is driven by an optimized reward signal framework that ensures adaptive and goal-oriented behavior.
+The SocraticAgent's performance is driven by an optimized reward signal framework that ensures adaptive and goal-oriented behavior. This framework is designed to evaluate and reinforce the agent's actions across various states, with a particular focus on the Orient state's analytical capabilities.
 
 ### Adaptive Action Potential
 - **Dynamic Triggers**: The agent's states are influenced by an adaptive action potential, a variable metric that prompts state transitions when it surpasses dynamic thresholds.
@@ -139,6 +139,64 @@ The SocraticAgent's performance is driven by an optimized reward signal framewor
 ### Comprehensive Behavior Evaluation
 - **Behavioral Analytics**: The enhanced reward system incorporates sophisticated analytics to assess new behaviors, examining their effectiveness and alignment with the agent's objectives.
 - **Performance Metrics**: It quantifies the impact of behaviors on the agent's overall performance, using a variety of metrics to ensure a balanced evaluation.
+
+### Observe State and Reward Handling
+
+In the Observe state, the SocraticAgent is tasked with gathering environmental data crucial for informing subsequent states. The reward system in this state is designed to incentivize the agent for:
+
+- **Data Collection**: Efficient and comprehensive data collection from the environment.
+- **Significance Detection**: Identifying significant events or changes that require the agent's attention.
+- **Timeliness**: Prompt recognition of new or relevant information as it becomes available.
+
+Rewards are allocated based on the agent's ability to filter out noise and focus on pertinent data, setting a strong foundation for accurate analysis in the Orient state.
+
+### Orient State and Reward Handling
+
+Within the Orient state, the SocraticAgent's reward system is finely tuned to encourage the identification of actionable insights and patterns from observed data. This state is critical as it sets the stage for the agent's decision-making process. 
+
+For instance, consider a terminal console sequence where the agent observes a login prompt, detects a user login, and then reads a confirmation message. The Orient state's role is to analyze this sequence and understand that a new user session has begun. The reward handling mechanism in this state would operate as follows:
+
+- **Complexity Recognition**: The agent is rewarded for recognizing the complexity of the events unfolding in the terminal, such as the transition from a boot sequence to a user login prompt.
+- **Accuracy of Analysis**: The agent is rewarded for accurately identifying and interpreting the login confirmation message as an indication of a successful user session initiation.
+- **Extraction of Actionable Insights**: The agent is rewarded for deriving actionable insights, such as preparing to interact with the user or updating session logs based on the login event.
+
+### Detect State and Reward Handling
+
+The Detect state involves the agent's recognition of specific patterns or anomalies within the observed data. Reward handling in this state focuses on:
+
+- **Pattern Recognition**: Accurately identifying known patterns or anomalies.
+- **Relevance Assessment**: Determining the relevance of detected patterns to the agent's objectives.
+- **Alertness**: Maintaining a high level of alertness to new or unexpected patterns.
+
+Rewards in the Detect state are given for the agent's precision in recognizing and prioritizing patterns that are crucial for decision-making processes.
+
+### Act State and Reward Handling
+
+The Act state is where the SocraticAgent executes the chosen actions based on decisions made in previous states. The reward system here emphasizes:
+
+- **Execution Accuracy**: Precise implementation of the decided actions.
+- **Impact Assessment**: Evaluating the effectiveness of actions on the environment.
+- **Goal Alignment**: Ensuring actions are aligned with the agent's overarching goals.
+
+Rewards are granted for successful actions that contribute positively towards achieving the agent's objectives, reinforcing the quality of execution.
+
+### Learn State and Reward Handling
+
+In the Learn state, the SocraticAgent reflects on the outcomes of its actions to adapt and improve future behaviors. The reward handling mechanism in this state includes:
+
+- **Outcome Analysis**: Assessing the success or failure of actions based on their outcomes.
+- **Strategy Adaptation**: Adjusting strategies to improve performance.
+- **Long-Term Improvement**: Focusing on continuous learning and development.
+
+Rewards are distributed based on the agent's ability to learn from past experiences, encouraging the refinement of strategies and avoidance of past mistakes.
+
+### Persistent Memory Integration
+
+To enhance the Orient state's effectiveness, the agent employs a persistent memory system, storing historical **StateProperties** to inform future actions. This allows the agent to build a performance history, improving its analysis and decision-making over time.
+
+### Implementation Considerations
+
+The integration of persistent memory with the Orient state involves considerations such as the storage format (e.g., binary files) and the mechanisms for serialization and deserialization of **StateProperties**. This ensures that the agent's learning is not just limited to a single session but extends across multiple interactions, allowing for cumulative knowledge and improved performance.
 
 ## Persistent Memory for StateProperties
 
