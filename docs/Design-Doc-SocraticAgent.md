@@ -151,6 +151,22 @@ The **Architectural Outline** provides a high-level view of the SocraticAgent's 
 | +transitionLogic()                                             |
 +----------------------------------------------------------------+
 ```
+## Inter-State Communication via StateProperties
+
+As we delve deeper into the SocraticAgent's architecture, it becomes imperative to address the mechanisms that enable seamless communication between states. The **StateProperties** object is pivotal in this regard, acting as a conduit for sharing data and ensuring states are synchronized without the need for costly memory operations. This section will explore the structure of the **StateProperties** object, the dynamics of state transitions, and the implementation of a messaging service designed to facilitate these interactions efficiently.
+
+## State Communication and Property Sharing
+
+In the SocraticAgent's architecture, efficient communication between states is crucial for maintaining a responsive and adaptive AI. To facilitate this, we utilize the **StateProperties** object, which acts as a shared resource among states. Here's how we can structure this system:
+
+### StateProperties Object
+The **StateProperties** object is a collection of properties that can be accessed and modified by different states. Instead of copying this object in memory, which can be resource-intensive, we pass references to it. This approach ensures that changes made by one state are immediately accessible to others, allowing for real-time updates without the overhead of duplicating data.
+
+### Dynamic State Transitions
+State transitions are not on a fixed schedule but are triggered by action potentials exceeding predefined thresholds. This dynamic system requires a flexible communication method that can handle asynchronous updates and state changes.
+
+### Messaging Service
+To manage the transfer of state information, we implement a messaging service within the PSM framework. This service doesn't send the **StateProperties** object itself but rather a reference to it.
 
 ## Conclusion
 
