@@ -8,8 +8,8 @@
 6. Multitasking and Concurrency
 7. Reward System Framework
 8  Persistent Memonics and State
-9. Inter-Communication for Properties
-10. State Communication and Property Sharing
+9. Inter-Communication for States
+10. State and Property Communication
 11. Conclusion
 
 ## Overview
