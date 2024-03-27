@@ -1,21 +1,49 @@
 # SocraticAgent Design Document
 
 ## Overview
-This document outlines the design for a SocraticAgent that operates within a game environment. The agent is structured around a dictionary of Finite State Machines (FSMs), each with its own state context, and governed by a root StateChart.
+This document describes the design of the SocraticAgent, a sophisticated AI system for a game environment that utilizes a parallel processing architecture. Each state within the agent, known as a ParallelState, operates independently and concurrently, allowing for a dynamic and responsive AI that can adapt to complex scenarios in real-time.
 
 ## System Architecture
-- **Dictionary of FSMs**: A collection of FSMs, each responsible for handling specific tasks within the agent's operation.
-- **State Context**: Each FSM maintains its own state context, allowing for localized decision-making and actions.
-- **Root StateChart**: A global class that encapsulates the dictionary of FSMs and manages transitions based on action potentials.
-- **Membrane Layer**: A governance system that oversees the creation and dissolution of FSMs based on predefined rules and the agent's performance.
+- **ParallelStates**: The core of the agent's architecture, where each state is an independent process capable of being activated or deactivated based on its action potential.
+- **StateProperties**: Individual properties and context for each ParallelState, enabling localized decision-making and actions without direct interference from other states.
+- **SessionProperties**: A set of properties that can be shared across ParallelStates, allowing for coordinated actions and information exchange without concurrency issues.
+- **Action Potential**: A dynamic value associated with each ParallelState that determines its activation, ensuring the agent can adapt its focus and resources as needed.
 
 ## Agent States
-The root StateChart manages the following states:
-1. **Observe**: Monitors the environment and gathers data.
-2. **Orient**: Analyzes the data to understand the situation.
-3. **Decide**: Determines the best course of action.
-4. **Act**: Executes the chosen action.
-5. **Learn**: An additional state where the agent evaluates the need for new behaviors and the potential creation of new FSMs.
+
+The SocraticAgent's functionality is encapsulated within a Parallel State Machine, where each state operates independently and concurrently. The states are activated based on their respective action potentials, allowing the agent to adaptively manage its focus and resources. The states, in their operational sequence, are as follows:
+
+1. **Observe**: Gathers environmental data for informed decision-making.
+2. **Orient**: Analyzes the data to understand the situation and identify key elements.
+3. **Decide**: Determines the best course of action based on the analysis.
+4. **Act**: Executes the chosen actions to influence the game environment.
+5. **Learn**: Reviews outcomes to refine strategies and improve future performance.
+
+Each state is designed to function autonomously, with its own set of StateProperties, while also being capable of referencing shared SessionProperties. This structure ensures that the agent can process multiple streams of information and actions simultaneously, adapting to the game environment in real-time.
+
+### Agent States Overview
+
+The SocraticAgent's Parallel State Machine is composed of five distinct states, each with a specific role in the agent's interaction with the game environment. These states are designed to work both independently and collaboratively, ensuring a comprehensive and adaptive AI system.
+
+#### Observe
+- **Purpose**: The Observe state is responsible for gathering data from the environment. It serves as the agent's sensory input, collecting information that will inform subsequent states.
+- **Reward Handling**: Rewards in this state are given for the timely and accurate collection of relevant data. The agent is incentivized to focus on significant changes or events that require attention.
+
+#### Orient
+- **Purpose**: In the Orient state, the agent analyzes the data collected during the Observe state. It contextualizes the information to understand the current situation and identify potential opportunities or threats.
+- **Reward Handling**: The agent receives rewards for successful identification of actionable insights and patterns within the data. The complexity and accuracy of the analysis are key factors in the reward mechanism.
+
+#### Decide
+- **Purpose**: The Decide state is where the agent selects the most appropriate course of action based on the analysis provided by the Orient state. It involves weighing options and predicting outcomes.
+- **Reward Handling**: Decision-making is rewarded based on the quality and effectiveness of the chosen actions. Decisions that lead to positive outcomes yield higher rewards, encouraging the agent to make sound choices.
+
+#### Act
+- **Purpose**: The Act state is the execution phase where the agent carries out the actions determined in the Decide state. This state directly affects the game environment.
+- **Reward Handling**: Execution is rewarded for both the precision of the actions and their impact on the environment. Successful actions that contribute to achieving the agent's goals are highly rewarded.
+
+#### Learn
+- **Purpose**: The Learn state is a reflective phase where the agent assesses the outcomes of its actions and adapts its strategies accordingly. It is crucial for the agent's long-term improvement and adaptability.
+- **Reward Handling**: Learning is rewarded based on the agent's ability to improve its performance over time. The agent is encouraged to develop new strategies and avoid repeating ineffective behaviors.
 
 ## Multitasking
 - **Concurrent FSMs**: Multiple FSMs operate concurrently, each managing different aspects of the agent's behavior.
