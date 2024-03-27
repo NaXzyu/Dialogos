@@ -7,6 +7,7 @@ This document outlines the design for a SocraticAgent that operates within a gam
 - **Dictionary of FSMs**: A collection of FSMs, each responsible for handling specific tasks within the agent's operation.
 - **State Context**: Each FSM maintains its own state context, allowing for localized decision-making and actions.
 - **Root StateChart**: A global class that encapsulates the dictionary of FSMs and manages transitions based on action potentials.
+- **Membrane Layer**: A governance system that oversees the creation and dissolution of FSMs based on predefined rules and the agent's performance.
 
 ## Agent States
 The root StateChart manages the following states:
@@ -14,14 +15,17 @@ The root StateChart manages the following states:
 2. **Orient**: Analyzes the data to understand the situation.
 3. **Decide**: Determines the best course of action.
 4. **Act**: Executes the chosen action.
+5. **Learn**: An additional state where the agent evaluates the need for new behaviors and the potential creation of new FSMs.
 
 ## Multitasking
 - **Concurrent FSMs**: Multiple FSMs operate concurrently, each managing different aspects of the agent's behavior.
 - **State Synchronization**: The root StateChart synchronizes the states of individual FSMs.
+- **Dynamic FSM Management**: The membrane layer dynamically manages FSMs, creating new ones for novel behaviors and pruning those that yield negative rewards.
 
 ## Reward Signal
 - **Action Potential**: A continuous value that triggers state transitions when exceeding a threshold.
 - **Action Threshold**: A predefined threshold that determines when a state change should occur.
+- **Behavior Evaluation**: The reward system now includes mechanisms for evaluating new behaviors and their contribution to the agent's overall performance.
 
 ## Development Tools
 - **Unity Hub**: Manages Unity project versions and installations.
@@ -33,6 +37,7 @@ The root StateChart manages the following states:
 2. **Implement StateChart**: Develop the root StateChart that manages the FSMs.
 3. **Integrate with Game Environment**: Ensure the agent's FSMs and StateChart are fully integrated with the game's runtime environment.
 4. **Testing and Iteration**: Conduct thorough testing and iterate based on performance and user feedback.
+5. **Implement Membrane Layer**: Develop the membrane layer to manage FSM creation and removal based on the agent's learning and behavior evaluation.
 
 ## Code Snippets
 
@@ -41,15 +46,18 @@ The root StateChart manages the following states:
 class StateChart {
     Dictionary<string, FSM> fsmDictionary;
     float actionThreshold;
+    MembraneLayer membraneLayer;
 
     StateChart(float threshold) {
         fsmDictionary = new Dictionary<string, FSM>();
         actionThreshold = threshold;
+        membraneLayer = new MembraneLayer();
     }
     void updateStateChart() {
         foreach (var fsm in fsmDictionary) {
             float actionPotential = fsm.Value.calculateActionPotential();
-            stateChart.updateState(fsm.Key, actionPotential);
+            updateState(fsm.Key, actionPotential);
+            membraneLayer.manageFSMs(this, stateProperty);
         }
     }
     void updateState(string fsmKey, float actionPotential) {
@@ -71,12 +79,35 @@ class FSM {
 }
 ```
 
+### Membrane Layer Class
+```plaintext
+class MembraneLayer {
+    // Logic to evaluate when to create or remove FSMs
+    void manageFSMs(StateChart stateChart, StateProperty stateProperty) {
+        // Evaluate the need for new FSMs
+        if (shouldCreateFSM(stateProperty)) {
+            String newFSMKey = createFSM();
+            stateChart.addFSM(newFSMKey, new FSM());
+        }
+
+        // Remove FSMs that consistently yield negative rewards
+        foreach (var fsmKey in stateChart.getFSMKeys()) {
+            if (shouldRemoveFSM(fsmKey, stateProperty)) {
+                stateChart.removeFSM(fsmKey);
+            }
+        }
+    }
+
+    // ... Additional methods for FSM management ...
+}
+```
+
 ### Main Loop
 ```plaintext
 StateChart stateChart = new StateChart(0.5); // Example threshold
 
 while (gameIsRunning) {
-    updateStateChart()
+    stateChart.updateStateChart();
     calculateReward();
 }
 ```
@@ -89,8 +120,30 @@ while (gameIsRunning) {
 |-------------------|
 | -fsmDictionary    |
 | -actionThreshold  |
+| -membraneLayer    |
+| -stateProperty    |
 |-------------------|
+| +updateStateChart()|
 | +updateState()    |
+| +addFSM()         |
+| +removeFSM()      |
++-------------------+
+         |          |
++-------------------+-------------------+
+|   MembraneLayer   |       States      |
+|-------------------|-------------------|
+|                   | 1. Observe        |
+| +manageFSMs()     | 2. Orient         |
+|                   | 3. Decide         |
++-------------------| 4. Act            |
+         |          | 5. Learn          |
++-------------------|-------------------|
+|    StateProperty  | +transitionLogic()|
+|-------------------|                   |
+| -properties       |                   |
+|-------------------+-------------------+
+| +setProperty()    |
+| +getProperty()    |
 +-------------------+
          |
          V
@@ -101,4 +154,6 @@ while (gameIsRunning) {
 |-------------------|
 | +nextState()      |
 +-------------------+
+         |
+         +--------------------------------+
 ```
