@@ -1,87 +1,104 @@
 # SocraticAgent Design Document
 
 ## Overview
-This document presents the design for a SocraticAgent within a game environment. The agent utilizes a statechart architecture to manage complex, multitasking behaviors and interacts with the game through an emulated keyboard interface.
+This document outlines the design for a SocraticAgent that operates within a game environment. The agent is structured around a dictionary of Finite State Machines (FSMs), each with its own state context, and governed by a root StateChart.
 
 ## System Architecture
-- **Statechart Architecture**: Enables concurrent state activations for multitasking.
-- **Emulated Keyboard Interaction**: Allows the agent to perform actions within the game environment as if pressing keys on a keyboard.
-- **Observation of Console Buffer Logs**: Monitors and processes in-game console buffer logs in real-time.
+- **Dictionary of FSMs**: A collection of FSMs, each responsible for handling specific tasks within the agent's operation.
+- **State Context**: Each FSM maintains its own state context, allowing for localized decision-making and actions.
+- **Root StateChart**: A global class that encapsulates the dictionary of FSMs and manages transitions based on action potentials.
 
 ## Agent States
-The statechart consists of states aligned with the OODA loop:
-1. **Observe**: Monitors the console buffer for new entries.
-2. **Orient**: Analyzes the observed data to understand the current context.
-3. **Decide**: Determines the best course of action based on the analysis.
-4. **Act**: Executes the chosen action, such as responding to commands or updating the game state.
+The root StateChart manages the following states:
+1. **Observe**: Monitors the environment and gathers data.
+2. **Orient**: Analyzes the data to understand the situation.
+3. **Decide**: Determines the best course of action.
+4. **Act**: Executes the chosen action.
 
 ## Multitasking
-- **Parallel Processing**: Handles multiple tasks simultaneously, with each state capable of running in parallel.
-- **State Synchronization**: Communicates and synchronizes between states to ensure coherent behavior.
+- **Concurrent FSMs**: Multiple FSMs operate concurrently, each managing different aspects of the agent's behavior.
+- **State Synchronization**: The root StateChart synchronizes the states of individual FSMs.
 
 ## Reward Signal
-- **Gradient Array**: An array of gradients represents different aspects of the agent's performance.
-- **Scaling and Combination**: Gradients are scaled according to their importance and combined into a single reward value.
-- **AddReward Invocation**: The `AddReward` function is called with the combined reward value to reinforce the agent's learning.
+- **Action Potential**: A continuous value that triggers state transitions when exceeding a threshold.
+- **Action Threshold**: A predefined threshold that determines when a state change should occur.
 
 ## Development Tools
 - **Unity Hub**: Manages Unity project versions and installations.
-- **Visual Studio Code**: Codes the agent's behavior and statechart logic.
+- **Visual Studio Code**: Codes the agent's behavior and FSM logic.
 - **Windows Tools**: Utilizes built-in Windows tools for debugging and performance monitoring.
 
 ## Implementation Steps
-1. **Define Observation Space**: Includes console buffer logs and game state information.
-2. **Set Up Statechart**: Implements the statechart with defined states and transitions.
-3. **Program Reward System**: Creates the gradient array and logic for scaling and combining gradients.
-4. **Integrate with Game Environment**: Ensures the agent's statechart and reward system are fully integrated with the game's runtime environment.
-5. **Testing and Iteration**: Conducts thorough testing and iterates based on performance and user feedback.
+1. **Define FSMs**: Create FSMs for different tasks and define their state contexts.
+2. **Implement StateChart**: Develop the root StateChart that manages the FSMs.
+3. **Integrate with Game Environment**: Ensure the agent's FSMs and StateChart are fully integrated with the game's runtime environment.
+4. **Testing and Iteration**: Conduct thorough testing and iterate based on performance and user feedback.
 
-## Pseudocode for SocraticAgent Statechart
+## Code Snippets
 
+### StateChart Class
 ```plaintext
-// Define the states of the statechart
-enum State {
-    OBSERVE,
-    ORIENT,
-    DECIDE,
-    ACT
-}
+class StateChart {
+    Dictionary<string, FSM> fsmDictionary;
+    float actionThreshold;
 
-// Initialize the statechart with the OBSERVE state as the starting point
-State currentState = State.OBSERVE;
-
-// Define the agent's behavior in each state
-function updateAgent() {
-    switch (currentState) {
-        case OBSERVE:
-            // Code to observe the console buffer logs
-            currentState = State.ORIENT;
-            break;
-        case ORIENT:
-            // Code to analyze the observed data
-            currentState = State.DECIDE;
-            break;
-        case DECIDE:
-            // Code to decide on the best course of action
-            currentState = State.ACT;
-            break;
-        case ACT:
-            // Code to execute the chosen action via emulated keyboard
-            handleActState();
-            break;
+    StateChart(float threshold) {
+        fsmDictionary = new Dictionary<string, FSM>();
+        actionThreshold = threshold;
+    }
+    void updateStateChart() {
+        foreach (var fsm in fsmDictionary) {
+            float actionPotential = fsm.Value.calculateActionPotential();
+            stateChart.updateState(fsm.Key, actionPotential);
+        }
+    }
+    void updateState(string fsmKey, float actionPotential) {
+        if (actionPotential > actionThreshold) {
+            fsmDictionary[fsmKey].nextState();
+        }
     }
 }
+```
 
-// Function to handle the ACT state with emulated keyboard output
-function handleActState() {
-    char keyToPress = decideKeyToPress();
-    emulateKeyPress(keyToPress);
-    currentState = State.OBSERVE;
+### FSM Class
+```plaintext
+class FSM {
+    State currentState;
+
+    void transitionToNextState() {
+        // Logic for state transition
+    }
 }
+```
 
-// Main loop to update the agent, running at 60 fps
+### Main Loop
+```plaintext
+StateChart stateChart = new StateChart(0.5); // Example threshold
+
 while (gameIsRunning) {
-    updateAgent();
+    updateStateChart()
     calculateReward();
 }
+```
+
+## ASCII Art Class Outline
+
+```
++-------------------+
+|    StateChart     |
+|-------------------|
+| -fsmDictionary    |
+| -actionThreshold  |
+|-------------------|
+| +updateState()    |
++-------------------+
+         |
+         V
++-------------------+
+|        FSM        |
+|-------------------|
+| -currentState     |
+|-------------------|
+| +nextState()      |
++-------------------+
 ```
