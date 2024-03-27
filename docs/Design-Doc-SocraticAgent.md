@@ -12,7 +12,7 @@
 10. State and Property Communication
 11. Conclusion
 
-## Overview
+## Introduction
 This document describes the design of the SocraticAgent, a sophisticated AI system for a game environment that utilizes a parallel processing architecture. Each state within the agent, known as a ParallelState, operates independently and concurrently, allowing for a dynamic and responsive AI that can adapt to complex scenarios in real-time.
 
 ## System Architecture
