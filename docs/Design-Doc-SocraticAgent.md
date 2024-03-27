@@ -61,138 +61,131 @@ The **Parallel State Machine** is a pivotal element of the SocraticAgent's frame
 - **Optimal State Processing**: Reward signals are structured to direct the agent through state processing in an optimal sequence for maximum reward.
 - **Atomic Jobs and Events**: Tasks are atomic events, with the Observe state initiating the signal cascade and engaging other states as necessary.
 
-## Multitasking
-- **Concurrent FSMs**: Multiple FSMs operate concurrently, each managing different aspects of the agent's behavior.
-- **State Synchronization**: The root StateChart synchronizes the states of individual FSMs.
-- **Dynamic FSM Management**: The membrane layer dynamically manages FSMs, creating new ones for novel behaviors and pruning those that yield negative rewards.
+## Enhanced Multitasking and Concurrency
 
-## Reward Signal
-- **Action Potential**: A continuous value that triggers state transitions when exceeding a threshold.
-- **Action Threshold**: A predefined threshold that determines when a state change should occur.
-- **Behavior Evaluation**: The reward system now includes mechanisms for evaluating new behaviors and their contribution to the agent's overall performance.
+The SocraticAgent's architecture is bolstered by an advanced multitasking framework that integrates a **Parallel State Machine** with a robust **Thread Processor** and **Job System**. This system is designed to manage and schedule complex concurrent tasks within the game engine and its subsystems, ensuring high efficiency and responsiveness.
 
-## Implementation Steps
-1. **Define FSMs**: Create FSMs for different tasks and define their state contexts.
-2. **Implement StateChart**: Develop the root StateChart that manages the FSMs.
-3. **Integrate with Game Environment**: Ensure the agent's FSMs and StateChart are fully integrated with the game's runtime environment.
-4. **Testing and Iteration**: Conduct thorough testing and iterate based on performance and user feedback.
-5. **Implement Membrane Layer**: Develop the membrane layer to manage FSM creation and removal based on the agent's learning and behavior evaluation.
+### Thread Processor and Job System
+- **Threads**: At the core of our system are Threads, which represent individual tasks that can be scheduled and executed on one of the machine's cores. These threads utilize semaphores to manage access to shared resources, preventing conflicts and ensuring smooth operation.
+- **Fibers**: A Fiber is a cohesive group of Threads that work in tandem to achieve a specific goal. Fibers allow for a more granular control of task execution, enabling the system to handle intricate and interdependent processes with ease.
 
-## Code Snippets
+### Integration with Parallel State Machine
+- **Concurrent FSMs**: The system employs multiple Finite State Machines (FSMs) that operate concurrently, each responsible for managing different facets of the agent's behavior within the game environment.
+- **State Synchronization**: A central StateChart oversees the synchronization of states across individual FSMs, ensuring that the agent's actions are coherent and contextually appropriate.
+- **Dynamic FSM Management**: An intelligent membrane layer dynamically oversees the FSMs, spawning new ones to accommodate emerging behaviors and pruning those that consistently result in negative outcomes.
 
-### StateChart Class
-```plaintext
-class StateChart {
-    Dictionary<string, FSM> fsmDictionary;
-    float actionThreshold;
-    MembraneLayer membraneLayer;
+### Task Scheduling and Execution
+- **Task Prioritization**: The Thread Processor evaluates and prioritizes tasks based on their urgency and relevance, assigning them to Threads within appropriate Fibers.
+- **Semaphore Coordination**: Semaphores are employed to orchestrate the execution of tasks, preventing race conditions and ensuring that critical sections of code are accessed in a controlled manner.
+- **Efficient Resource Allocation**: The Job System intelligently allocates resources, ensuring that each Thread and Fiber has the necessary computational power to perform optimally without wastage.
 
-    StateChart(float threshold) {
-        fsmDictionary = new Dictionary<string, FSM>();
-        actionThreshold = threshold;
-        membraneLayer = new MembraneLayer();
-    }
-    void updateStateChart() {
-        foreach (var fsm in fsmDictionary) {
-            float actionPotential = fsm.Value.calculateActionPotential();
-            updateState(fsm.Key, actionPotential);
-            membraneLayer.manageFSMs(this, stateProperty);
-        }
-    }
-    void updateState(string fsmKey, float actionPotential) {
-        if (actionPotential > actionThreshold) {
-            fsmDictionary[fsmKey].nextState();
-        }
-    }
-}
-```
+By intertwining Threads and Fibers with the existing Parallel State Machine, the SocraticAgent achieves a new level of multitasking capability. This design not only enhances the agent's ability to process multiple streams of information but also fortifies its capacity to execute complex, concurrent tasks within the dynamic and demanding context of game environments.
 
-### FSM Class
-```plaintext
-class FSM {
-    State currentState;
+## Optimized Reward Signal Framework
 
-    void nextState() {
-        // Logic for state transition
-    }
-}
-```
+The SocraticAgent's performance is driven by an optimized reward signal framework that ensures adaptive and goal-oriented behavior.
 
-### Membrane Layer Class
-```plaintext
-class MembraneLayer {
-    // Logic to evaluate when to create or remove FSMs
-    void manageFSMs(StateChart stateChart, StateProperty stateProperty) {
-        // Evaluate the need for new FSMs
-        if (shouldCreateFSM(stateProperty)) {
-            String newFSMKey = createFSM();
-            stateChart.addFSM(newFSMKey, new FSM());
-        }
+### Adaptive Action Potential
+- **Dynamic Triggers**: The agent's states are influenced by an adaptive action potential, a variable metric that prompts state transitions when it surpasses dynamic thresholds.
+- **Contextual Thresholds**: These thresholds are not static; they adjust based on the agent's current context and past experiences, optimizing the timing for state changes.
 
-        // Remove FSMs that consistently yield negative rewards
-        foreach (var fsmKey in stateChart.getFSMKeys()) {
-            if (shouldRemoveFSM(fsmKey, stateProperty)) {
-                stateChart.removeFSM(fsmKey);
-            }
-        }
-    }
+### Comprehensive Behavior Evaluation
+- **Behavioral Analytics**: The enhanced reward system incorporates sophisticated analytics to assess new behaviors, examining their effectiveness and alignment with the agent's objectives.
+- **Performance Metrics**: It quantifies the impact of behaviors on the agent's overall performance, using a variety of metrics to ensure a balanced evaluation.
 
-    // ... Additional methods for FSM management ...
-}
-```
+## Detailed Implementation Steps for Parallel State Machine
 
-### Main Loop
-```plaintext
-StateChart stateChart = new StateChart(0.5); // Example threshold
+1. **Define Parallel State Machines (PSMs)**
+   - Identify the various tasks the agent will perform within the game environment.
+   - For each task, create a dedicated PSM with its own states and transitions.
+   - Define the context and conditions for each state within the PSMs.
 
-while (gameIsRunning) {
-    stateChart.updateStateChart();
-    calculateReward();
-}
-```
+2. **Develop the Core Parallel State Machine Framework**
+   - Establish a central framework that will manage all PSMs.
+   - Implement a system to track and update the state of each PSM.
+   - Ensure that the core framework can handle dynamic creation and removal of PSMs.
 
-## ASCII Art Class Outline
+3. **Integrate PSMs with Game Environment**
+   - Embed the PSM framework into the game's runtime environment.
+   - Connect each PSM to relevant game systems and events.
+   - Set up communication channels between PSMs and the game environment for data exchange.
+
+4. **Testing and Iteration**
+   - Unit test each PSM independently to ensure correct state transitions and actions.
+   - Integrate testing with the game environment to evaluate the PSMs' interactions with game systems.
+   - Collect performance data and user feedback for iterative improvements.
+
+5. **Implement Membrane Layer for Dynamic PSM Management**
+   - Develop a membrane layer that will oversee the PSMs, assessing their performance and relevance.
+   - Implement logic for the creation of new PSMs when novel behaviors or tasks are identified.
+   - Set up criteria for the removal of PSMs that are not contributing positively to the agent's performance.
+
+6. **Optimize PSM Synchronization and Concurrency**
+   - Design synchronization mechanisms to ensure PSMs operate in harmony without conflicts.
+   - Optimize the concurrent execution of PSMs to maximize efficiency and responsiveness.
+
+7. **Refine Reward System and Behavior Evaluation**
+   - Fine-tune the reward signals associated with each PSM to reinforce beneficial behaviors.
+   - Implement a comprehensive evaluation system to assess the impact of behaviors on the agent's overall goals.
+
+8. **Final Integration and Full System Testing**
+   - Perform a full integration test of the PSM framework with the game environment.
+   - Conduct stress tests to evaluate the system's performance under various scenarios.
+   - Make final adjustments based on comprehensive testing results and user feedback.
+
+By following these detailed steps, the development of the Parallel State Machine will be structured and incremental, allowing for thorough testing and refinement at each stage.
+
+## Archectural  Outline
 
 ```
-+-------------------+
-|    StateChart     |
-|-------------------|
-| -fsmDictionary    |
-| -actionThreshold  |
-| -membraneLayer    |
-| -stateProperty    |
-|-------------------|
-| +updateStateChart()|
-| +updateState()    |
-| +addFSM()         |
-| +removeFSM()      |
-+-------------------+
-         |          |
++-------------------+     +-------------------+
+|    StateChart     |     |    Thread Proc.   |
+|-------------------|     |-------------------|
+| -fsmDict          |     | -threadQueue      |
+| -actThresh        |     | -semaphores       |
+| -membLayer        |     | -coreAssignment   |
+| -stateProp        |     |-------------------|
+|-------------------|     | +scheduleJob()    |
+| +updateStateChart()|     | +manageThreads()  |
+| +updateState()    |     | +assignCore()     |
+| +addFSM()         |     +-------------------+
+| +removeFSM()      |             |
++-------------------+             |
+         |                        |
++-------------------+     +-------------------+
+|   MembraneLayer   |     |       Fibers      |
+|-------------------|     |-------------------|
+|                   |     | -fiberGroup       |
+| +manageFSMs()     |     | -taskGrouping     |
+|                   |     |-------------------|
++-------------------|     | +groupThreads()   |
+         |                        |
++-------------------+     +-------------------+
+|    StateProperty  |     |       Jobs        |
+|-------------------|     |-------------------|
+| -properties       |     | -jobList          |
+|-------------------|     | -priority         |
+| +setProperty()    |     |-------------------|
+| +getProperty()    |     | +createJob()      |
++-------------------+     | +executeJob()     |
+         |                +-------------------+
+         V                        |
++-------------------+             |
+|        FSM        |             |
+|-------------------|             |
+| -currentState     |             |
+|-------------------|             |
+| +nextState()      |             |
++-------------------+             |
+         |                        |
+         +-----------+------------+
+                     |
 +-------------------+-------------------+
-|   MembraneLayer   |       States      |
-|-------------------|-------------------|
-|                   | 1. Observe        |
-| +manageFSMs()     | 2. Orient         |
-|                   | 3. Decide         |
-+-------------------| 4. Act            |
-         |          | 5. Learn          |
-+-------------------|-------------------|
-|    StateProperty  | +transitionLogic()|
-|-------------------|                   |
-| -properties       |                   |
-|-------------------+-------------------+
-| +setProperty()    |
-| +getProperty()    |
-+-------------------+
-         |
-         V
-+-------------------+
-|        FSM        |
-|-------------------|
-| -currentState     |
-|-------------------|
-| +nextState()      |
-+-------------------+
-         |
-         +--------------------------------+
+|               States                 |
+|--------------------------------------|
+| 1. Observe  2. Orient  3. Decide     |
+| 4. Act      5. Learn                 |
+|--------------------------------------|
+| +transitionLogic()                   |
++--------------------------------------+
 ```
