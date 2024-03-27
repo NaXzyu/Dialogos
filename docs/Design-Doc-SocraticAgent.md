@@ -7,7 +7,7 @@
 5. Parellel State Machine (PSM)
 6. Multitasking and Concurrency
 7. Reward System Framework
-8  Persistent Memonics and State
+8.  Persistent Memonics and State
 9. Inter-Communication for States
 10. State and Property Communication
 11. Conclusion
