@@ -65,7 +65,7 @@ class StateChart {
 class FSM {
     State currentState;
 
-    void transitionToNextState() {
+    void nextState() {
         // Logic for state transition
     }
 }
