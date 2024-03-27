@@ -45,6 +45,22 @@ The SocraticAgent's Parallel State Machine is composed of five distinct states, 
 - **Purpose**: The Learn state is a reflective phase where the agent assesses the outcomes of its actions and adapts its strategies accordingly. It is crucial for the agent's long-term improvement and adaptability.
 - **Reward Handling**: Learning is rewarded based on the agent's ability to improve its performance over time. The agent is encouraged to develop new strategies and avoid repeating ineffective behaviors.
 
+## Parallel State Machine Overview
+
+The **Parallel State Machine** is a pivotal element of the SocraticAgent's framework, facilitating the simultaneous operation of multiple states. This structure is essential for the agent's advanced functionality within game environments, enabling it to handle intricate tasks and make decisions autonomously and precisely.
+
+### Functionality and Dynamics
+- **Dynamic State Activation**: States, termed ParallelStates, are activated based on their action potential, a dynamic metric influenced by the current context and environmental conditions.
+- **Concurrent Execution**: These states operate in parallel, each in its own process, ensuring multitasking capabilities and swift adaptation to environmental changes.
+- **StateProperties and SessionProperties**: Each state has unique StateProperties guiding its behavior, while SessionProperties are shared across states for coordinated action without concurrency issues.
+- **Immutable Vector Spaces**: The machine's design prevents simultaneous creation of identical state types, yet allows all states to run concurrently as distinct instances.
+
+### Signal Propagation and Reward System
+- **Membrane Dynamics**: Action potentials are akin to signals traversing a membrane, with the membrane's properties affecting signal behavior—mirroring the agent's action potential dynamics.
+- **Action Potential Calculation**: The calculation reflects these dynamics, keeping the Observe state alert and transitioning to idle after inactivity.
+- **Optimal State Processing**: Reward signals are structured to direct the agent through state processing in an optimal sequence for maximum reward.
+- **Atomic Jobs and Events**: Tasks are atomic events, with the Observe state initiating the signal cascade and engaging other states as necessary.
+
 ## Multitasking
 - **Concurrent FSMs**: Multiple FSMs operate concurrently, each managing different aspects of the agent's behavior.
 - **State Synchronization**: The root StateChart synchronizes the states of individual FSMs.
