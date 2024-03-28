@@ -178,11 +178,6 @@ The Observe state operates on a dynamic activation-deactivation cycle, which is 
 
 This dynamic approach allows the SocraticAgent to maintain a balance between vigilance and resource efficiency, activating the Observe state as needed to ensure responsiveness to the game environment while allowing for concurrent processing across multiple states.
 
-
-
-
-
-
 ### Orient State and Reward Handling
 
 Within the Orient state, the SocraticAgent's reward system is finely tuned to encourage the identification of actionable insights and patterns from observed data. This state is critical as it sets the stage for the agent's decision-making process. 
@@ -337,29 +332,68 @@ By carefully managing the action potentials and environmental triggers, the agen
 
 This approach allows the SocraticAgent to leverage the advantages of a PSM while still maintaining an effective sequence of actions that adapt to the environment's demands. The agent remains agile and capable of multitasking, yet it can also focus on specific tasks in a sequential order when the situation calls for it, ensuring a smooth and efficient operation within the game environment.
 
-## Persistent Memory for StateProperties
+#### Persistent Memory for StateProperties
+As the SocraticAgent evolves and interacts within the game environment, it accumulates a wealth of experience that can be leveraged for future decision-making. To harness this valuable data, we introduce a system for persistent memory storage, specifically designed for StateProperties. This system will enable the agent to store and recall accumulated knowledge, facilitating continuous learning and improvement over time.
 
-As the SocraticAgent evolves and interacts within the game environment, it accumulates a wealth of experience that can be leveraged for future decision-making. To harness this valuable data, we introduce a system for persistent memory storage, specifically designed for **StateProperties**. This system will enable the agent to store and recall accumulated knowledge, facilitating continuous learning and improvement over time.
-
-### Concept of Persistent Memory
-
+##### Concept of Persistent Memory
 Persistent memory refers to the ability of the agent to retain information across different sessions or episodes. This is akin to a human's long-term memory, where past experiences inform present actions. For the SocraticAgent, this means remembering the outcomes of previous decisions and using that knowledge to make more informed choices in the future.
 
-### Role of StateProperties in Memory
+##### Role of StateProperties in Memory
+StateProperties play a crucial role in this process, as they contain the data that the agent needs to remember. By storing these properties persistently, the agent can reference past states and the context in which decisions were made, leading to a more nuanced understanding of the game environment.
 
-**StateProperties** play a crucial role in this process, as they contain the data that the agent needs to remember. By storing these properties persistently, the agent can reference past states and the context in which decisions were made, leading to a more nuanced understanding of the game environment.
+##### Implementation Strategy
+The implementation of persistent memory will involve storing StateProperties in a binary format, which is both space-efficient and fast to access. This approach ensures that the agent's memory footprint is minimized while allowing for quick retrieval of information when needed.
 
-### Implementation Strategy
-
-The implementation of persistent memory will involve storing **StateProperties** in a binary format, which is both space-efficient and fast to access. This approach ensures that the agent's memory footprint is minimized while allowing for quick retrieval of information when needed.
-
-### Benefits of Persistent Memory
-
+##### Benefits of Persistent Memory
 With persistent memory, the SocraticAgent's capacity for learning and adaptation is significantly enhanced. It can develop a historical context, recognize patterns over time, and avoid repeating past mistakes. This leads to a more sophisticated AI that can grow and adapt alongside the game it inhabits.
 
-## Inter-State Communication via StateProperties
+##### Multi-Version Concurrency Control (MVCC)
+To manage the concurrent modifications of StateProperties by different states, we employ a Multi-Version Concurrency Control (MVCC) system. This system allows for multiple versions of StateProperties to exist simultaneously, enabling states to read from a consistent version of the data while writes produce new versions. This approach ensures that read operations are not blocked by write operations, which can significantly improve performance in systems with heavy read and write demands.
 
-As we delve deeper into the SocraticAgent's architecture, it becomes imperative to address the mechanisms that enable seamless communication between states. The **StateProperties** object is pivotal in this regard, acting as a conduit for sharing data and ensuring states are synchronized without the need for costly memory operations. This section will explore the structure of the **StateProperties** object, the dynamics of state transitions, and the implementation of a messaging service designed to facilitate these interactions efficiently.
+###### Version Lag Acceptance
+It's acceptable for some versions of the StateProperties to be behind the latest ("head") version. This latency in the propagation of state updates is a natural part of the MVCC system and is expected due to the asynchronous nature of state transitions.
+
+###### Eventual Consistency
+Over time, the correct values will propagate through the system, ensuring that all components eventually reach a consistent state. The key is that the system is designed to tolerate and manage this latency, ensuring that it doesn't impact the overall functionality and decision-making processes of the SocraticAgent.
+
+#### Inter-State Communication via StateProperties
+In the SocraticAgent's architecture, efficient communication between states is crucial for maintaining a responsive and adaptive AI. To facilitate this, we utilize the StateProperties object, which acts as a shared resource among states. Here's how we can structure this system:
+
+##### StateProperties Object
+The StateProperties object is a collection of properties that can be accessed and modified by different states. Instead of copying this object in memory, which can be resource-intensive, we pass references to it. This approach ensures that changes made by one state are immediately accessible to others, allowing for real-time updates without the overhead of duplicating data.
+
+##### Dynamic State Transitions
+State transitions are not on a fixed schedule but are triggered by action potentials exceeding predefined thresholds. This dynamic system requires a flexible communication method that can handle asynchronous updates and state changes.
+
+##### Messaging Service with Event Filtering
+To manage the transfer of state information, we implement a messaging service within the PSM framework. This service doesn't send the StateProperties object itself but rather a reference to it, minimizing resource usage and ensuring efficient data transfer.
+
+###### Event Filtering Mechanism
+Inspired by biological systems, our messaging service incorporates a series of regex filters to manage event communication. This mechanism functions similarly to chemical signaling in cells, where different patterns of molecules represent different events, and only certain molecules can pass through specific receptors.
+
+- **Regex Filters**: Each state is equipped with regex filters that determine which events it receives, based on the patterns defined in the filters.
+- **Selective Reception**: This selective reception ensures that states are only activated by events relevant to their function, maintaining system efficiency and preventing unnecessary state activations.
+- **Dynamic Adaptation**: The filters can be dynamically adjusted to respond to the evolving needs of the game environment, much like how biological receptors can change sensitivity or number in response to environmental stimuli.
+
+By implementing this event filtering mechanism, we can enhance the precision and responsiveness of the SocraticAgent's state transitions, ensuring that each state operates optimally within the larger system.
+
+##### Event Message Object
+To streamline the communication between states, we introduce an event message object. This object serves as a container for event data, facilitating the transfer of information within the PSM framework.
+
+###### Structure of the Event Message Object
+- **Reference**: Each event message object contains a reference to a specific StateProperties object, ensuring that states have access to the relevant data.
+- **Versioning**: The object includes the version number of the StateProperties it references, allowing states to determine the recency of the data.
+- **Signature/Value Property**: A distinct signature or value property is included within the event message object. This property is used by regex filters to identify and process events relevant to each state.
+
+###### Efficient Event Handling
+- **Regex Filtering**: States use regex filters to parse the signature or value property of incoming event message objects. This ensures that states respond only to events pertinent to their roles.
+- **Targeted Communication**: By filtering events based on signatures, the system avoids unnecessary processing and maintains high efficiency.
+- **Dynamic Adaptation**: The regex patterns can be dynamically updated to reflect changes in the game environment or the agent's objectives.
+
+By incorporating the event message object with a signature-based filtering mechanism, the SocraticAgent's messaging service becomes more sophisticated, mirroring the specificity and adaptability found in biological systems.
+
+##### Handling Concurrency with MVCC
+Given the need for concurrent access to StateProperties, we implement a versioning system as part of our MVCC approach. This system allows for multiple versions of StateProperties to exist, with states operating on the version that was current at the start of their transaction. This ensures that updates do not interfere with each other, and states can work with a consistent view of the data.
 
 ## State Communication and Property Sharing
 
