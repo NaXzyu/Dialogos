@@ -2,110 +2,12 @@
 
 1. Introduction
 2. Architectural Outline
-   1. System Architecture
 3. Interaction with Console Buffer
-   1. Overview
-   2. Buffer Management Protocol
-      1. Archiving Mechanism
-      2. Buffer Versioning
-   3. State Awareness and Data Retrieval
-      1. Observation Goals
-      2. Change Detection
-      3. Event Handling
-   4. Concurrency and Synchronization
-      1. Session Management
-	  2. Network Messaging
-   5. Implementation Strategy
-      1. Event-Driven Architecture
-	  2. Memory Management
-   6. Evaluation and Testing
-      1. Performance Metrics
-	  2. Feedback Loops
-   7. Future Work
-      1.Scalability
-   8. Persistent Storage
-      1. Binary File Storage
-	  2. Data Integrity and Security
-	  3. Access and Retreival
-	  4. Compatibility and Scalability
 4. Agential States
-   1. Agent States Overview
-   2. Handling State and Property Conflicts
-      1. Conflict Resolution Strategies
-	  2. Dynamic Priority Adjustment
-	  3. Feedback Loops
-   3. Preventing Logic Loops and Overfitting
-      1. Loop Detection and Interruption
-	  2. Avoiding Overfitting
 5. Parallel State Machine
-   1. Functionality and Dynamics
-   2. Signal Propagation and Reward System
 6. Multitasking and Concurrency
-   1. Thread Processor and Job System
-   2. Integration with Parallel State Machine
-   3. Task Scheduling and Execution
 7. Optimized Reward Signal Framework
-   1. Adaptive Action Potential
-   2. Comprehensive Behavior Evaluation
-   3. Observe State and Reward Handling
-      1.Enhanced Data Collection
-	  2. Advanced Significance Detection
-	  3. Adaptive Timeliness
-   4. Transition and Deactivation of the Observe State
-      1. Dynamic Activation
-	  2. Activation Criteria
-	  3. Deactivation Criteria
-	  4. Concurrent Operation with Other States
-   5. Orient State and Reward Handling
-   6. Transition and Activation of the Orient State
-      1. Dynamic Activation
-	  2. Activation Criteria
-	  3. Deactivation Criteria
-	  4. Concurrent Operation with Other States
-   7. Decide State and Reward Handling
-   8. Transition and Activation of the Decide State
-      1. Dynamic Activation
-	  2. Activation Criteria
-	  3. Deactivation Criteria
-	  4. Concurrent Operation with Other States
-   9. Act State and Reward Handling
-   10. Transition and Activation of the Act State
-      1. Dynamic Activation
-	  2. Activation Criteria
-	  3. Deactivation Criteria
-	  4. Concurrent Operation with Other States
-   11. Learn State and Reward Handling
-   12. Transition and Activation of the Learn State
-      1. Dynamic Activation
-	  2. Activation Criteria
-	  3. Deactivation Criteria
-	  4. Concurrent Operation with Other States
-   13. Persistent Memory Integration
-   14. Implementation Considerations
-   15. Managing State Transitions in a Parallel State Machine
-      1. Encouraging Sequential Flow as Needed
-	  2. Balancing Concurrency with Order
-	  3. Example: Terminal Console Login Sequence
-	  4. Persistent Memory for StateProperties
-	     1. Concept of Persistent Memory
-	     2. Role of StateProperties in Memory
-		 3. Benefits of Persistent Memory
-		 4. Multi-Version Concurrency Control (MVCC)
-		    1. Version Lag Acceptance
-			2. Eventual Consistency
-	     5. Inter-State Communication via StateProperties
-		    1. StateProperties Object
-			2. Dynamic State Transitions
-			3. Messaging Service with Event Filtering
-			   1. Event Filtering Mechanism
-			4. Event Message Object
-			   1. Structure of the Event Message Object
-			   2. Efficient Event Handling
-		    5. Handling Concurrency with MVCC
 8. State Communication and Property Sharing
-   1. StateProperties Object
-   2. Dynamic State Transitions
-   3. Messaging Service
 9. Conclusion
 
 ## Introduction
