@@ -1,16 +1,112 @@
 # SocraticAgent Design Document
 
 1. Introduction
-2. Architectural Overview
-3. Detailed Implementation Steps
-4. Agential State Outline
-5. Parellel State Machine (PSM)
+2. Architectural Outline
+   1. System Architecture
+3. Interaction with Console Buffer
+   1. Overview
+   2. Buffer Management Protocol
+      1. Archiving Mechanism
+      2. Buffer Versioning
+   3. State Awareness and Data Retrieval
+      1. Observation Goals
+      2. Change Detection
+      3. Event Handling
+   4. Concurrency and Synchronization
+      1. Session Management
+	  2. Network Messaging
+   5. Implementation Strategy
+      1. Event-Driven Architecture
+	  2. Memory Management
+   6. Evaluation and Testing
+      1. Performance Metrics
+	  2. Feedback Loops
+   7. Future Work
+      1.Scalability
+   8. Persistent Storage
+      1. Binary File Storage
+	  2. Data Integrity and Security
+	  3. Access and Retreival
+	  4. Compatibility and Scalability
+4. Agential States
+   1. Agent States Overview
+   2. Handling State and Property Conflicts
+      1. Conflict Resolution Strategies
+	  2. Dynamic Priority Adjustment
+	  3. Feedback Loops
+   3. Preventing Logic Loops and Overfitting
+      1. Loop Detection and Interruption
+	  2. Avoiding Overfitting
+5. Parallel State Machine
+   1. Functionality and Dynamics
+   2. Signal Propagation and Reward System
 6. Multitasking and Concurrency
-7. Reward System Framework
-8. Persistent Memonics and State
-9. Inter-Communication for States
-10. State and Property Communication
-11. Conclusion
+   1. Thread Processor and Job System
+   2. Integration with Parallel State Machine
+   3. Task Scheduling and Execution
+7. Optimized Reward Signal Framework
+   1. Adaptive Action Potential
+   2. Comprehensive Behavior Evaluation
+   3. Observe State and Reward Handling
+      1.Enhanced Data Collection
+	  2. Advanced Significance Detection
+	  3. Adaptive Timeliness
+   4. Transition and Deactivation of the Observe State
+      1. Dynamic Activation
+	  2. Activation Criteria
+	  3. Deactivation Criteria
+	  4. Concurrent Operation with Other States
+   5. Orient State and Reward Handling
+   6. Transition and Activation of the Orient State
+      1. Dynamic Activation
+	  2. Activation Criteria
+	  3. Deactivation Criteria
+	  4. Concurrent Operation with Other States
+   7. Decide State and Reward Handling
+   8. Transition and Activation of the Decide State
+      1. Dynamic Activation
+	  2. Activation Criteria
+	  3. Deactivation Criteria
+	  4. Concurrent Operation with Other States
+   9. Act State and Reward Handling
+   10. Transition and Activation of the Act State
+      1. Dynamic Activation
+	  2. Activation Criteria
+	  3. Deactivation Criteria
+	  4. Concurrent Operation with Other States
+   11. Learn State and Reward Handling
+   12. Transition and Activation of the Learn State
+      1. Dynamic Activation
+	  2. Activation Criteria
+	  3. Deactivation Criteria
+	  4. Concurrent Operation with Other States
+   13. Persistent Memory Integration
+   14. Implementation Considerations
+   15. Managing State Transitions in a Parallel State Machine
+      1. Encouraging Sequential Flow as Needed
+	  2. Balancing Concurrency with Order
+	  3. Example: Terminal Console Login Sequence
+	  4. Persistent Memory for StateProperties
+	     1. Concept of Persistent Memory
+	     2. Role of StateProperties in Memory
+		 3. Benefits of Persistent Memory
+		 4. Multi-Version Concurrency Control (MVCC)
+		    1. Version Lag Acceptance
+			2. Eventual Consistency
+	     5. Inter-State Communication via StateProperties
+		    1. StateProperties Object
+			2. Dynamic State Transitions
+			3. Messaging Service with Event Filtering
+			   1. Event Filtering Mechanism
+			4. Event Message Object
+			   1. Structure of the Event Message Object
+			   2. Efficient Event Handling
+		    5. Handling Concurrency with MVCC
+8. State Communication and Property Sharing
+   1. StateProperties Object
+   2. Dynamic State Transitions
+   3. Messaging Service
+9. Conclusion
 
 ## Introduction
 
@@ -81,7 +177,7 @@ The **Architectural Outline** provides a high-level view of the SocraticAgent's 
 +----------------------------------------------------------------+
 ```
 
-## AI Agent Interaction with Console Buffer Logs
+## Interaction with Console Buffer
 
 ### Overview
 This section outlines the design and interaction protocols between the AI agent's Observe state and the console buffer logs, ensuring effective observation and data retrieval even in the event of buffer clearance.
@@ -138,9 +234,7 @@ User and expert feedback are integral to the continuous improvement of the AI ag
 The Future Work section discusses the ongoing development and potential enhancements for the AI agent's interaction with the console buffer logs. It considers scalability, long-term storage solutions, and other advancements that could further improve the system.
 
 #### Scalability
-As the system grows, considerations for scaling the number of agents and sessions are essential. The design includes provisions for adding more agents and managing larger volumes of data without compromising performance.
-
-Using a binary `.bin` file for storing buffer logs is a common and efficient approach in game development for saving state and player progress. Here's how you can incorporate this information into the Persistent Storage subsection:
+As the system grows, considerations for scaling the number of agents and sessions are essential. The design includes provisions for adding more agents and managing larger volumes of data without compromising performance. Using a binary `.bin` file for storing buffer logs is a common and efficient approach in game development for saving state and player progress. Here's how you can incorporate this information into the Persistent Storage subsection:
 
 ### Persistent Storage
 The Persistent Storage strategy is designed to ensure the long-term preservation and accessibility of console buffer logs. By leveraging a binary file system, similar to the methods used in game save files, the system can maintain a compact and efficient storage solution.
@@ -158,7 +252,6 @@ The AI agent will have mechanisms in place to access and retrieve data from the 
 The binary file storage system will be designed with compatibility and scalability in mind, ensuring that it can handle the evolving needs of the AI agent and the console environment. This includes considerations for future enhancements such as cloud storage integration or database indexing for faster data retrieval.
 
 ## Agential States
-
 The SocraticAgent's functionality is encapsulated within a Parallel State Machine, where each state operates independently and concurrently. The states are activated based on their respective action potentials, allowing the agent to adaptively manage its focus and resources. The states, in their operational sequence, are as follows:
 
 1. **Observe**: Gathers environmental data for informed decision-making.
@@ -182,7 +275,6 @@ The SocraticAgent's Parallel State Machine is composed of five distinct states, 
 | Learn | The Learn state is a reflective phase where the agent assesses the outcomes of its actions and adapts its strategies accordingly. It is crucial for the agent's long-term improvement and adaptability. | Learning is rewarded based on the agent's ability to improve its performance over time. The agent is encouraged to develop new strategies and avoid repeating ineffective behaviors. |
 
 ### Handling State and Property Conflicts
-
 In a complex system like the SocraticAgent, where multiple states operate concurrently, conflicts over shared resources or contradictory goals are inevitable. To manage these conflicts effectively, the system employs a hierarchy of strategies. Priority levels are assigned to each state, ensuring that the most critical tasks take precedence. An arbitration mechanism is in place to make context-aware decisions to resolve conflicts, especially when they arise between states with similar priority levels. Additionally, a property locking system is used to prevent simultaneous conflicting modifications to shared properties, ensuring data integrity. These strategies are complemented by dynamic priority adjustments, allowing the system to remain flexible and responsive to the changing demands of the game environment.
 
 #### Conflict Resolution Strategies
@@ -199,7 +291,6 @@ The agent can dynamically adjust the priorities of states based on the current s
 Feedback loops can be established to monitor state interactions and adjust the system's behavior to prevent conflicts proactively.
 
 ### Preventing Logic Loops and Overfitting
-
 The SocraticAgent’s design includes safeguards against common pitfalls such as logic loops and overfitting. Loop detection algorithms monitor state transitions for cyclical patterns, interrupting them if necessary, while state transition limits prevent infinite loops by restricting the number of transitions within a given timeframe. To avoid overfitting, regularization techniques are applied to the learning algorithms, ensuring that the agent’s strategies remain generalizable to new scenarios. Cross-validation methods further validate the agent’s performance across different environments. Moreover, a balance between exploration and exploitation is maintained, encouraging the agent to discover new strategies and adapt to the game environment, rather than overfitting to a limited set of experiences.
 
 #### Loop Detection and Interruption
@@ -215,12 +306,7 @@ To prevent the agent from overfitting:
 - **Cross-Validation**: Use cross-validation methods to ensure that the agent's learning generalizes well to new, unseen environments.
 - **Exploration vs. Exploitation**: Balance the agent's tendency to exploit known strategies with the exploration of new ones to encourage adaptability and prevent overfitting to specific scenarios.
 
-
-
-
-
-## Parallel State Machine Overview
-
+## Parallel State Machine
 The **Parallel State Machine** is a pivotal element of the SocraticAgent's framework, facilitating the simultaneous operation of multiple states. This structure is essential for the agent's advanced functionality within game environments, enabling it to handle intricate tasks and make decisions autonomously and precisely.
 
 ### Functionality and Dynamics
@@ -235,9 +321,8 @@ The **Parallel State Machine** is a pivotal element of the SocraticAgent's frame
 - **Optimal State Processing**: Reward signals are structured to direct the agent through state processing in an optimal sequence for maximum reward.
 - **Atomic Jobs and Events**: Tasks are atomic events, with the Observe state initiating the signal cascade and engaging other states as necessary.
 
-## Enhanced Multitasking and Concurrency
-
-The SocraticAgent's architecture is bolstered by an advanced multitasking framework that integrates a **Parallel State Machine** with a robust **Thread Processor** and **Job System**. This system is designed to manage and schedule complex concurrent tasks within the game engine and its subsystems, ensuring high efficiency and responsiveness.
+## Multitasking and Concurrency
+The SocraticAgent's architecture is bolstered by an advanced multitasking framework that integrates a **Parallel State Machine** with a robust **Thread Processor** and **Job System**. This system is designed to manage and schedule complex concurrent tasks within the game engine and its subsystems, ensuring high efficiency and responsiveness. By intertwining Threads and Fibers with the existing Parallel State Machine, the SocraticAgent achieves a new level of multitasking capability. This design not only enhances the agent's ability to process multiple streams of information but also fortifies its capacity to execute complex, concurrent tasks within the dynamic and demanding context of game environments.
 
 ### Thread Processor and Job System
 - **Threads**: At the core of our system are Threads, which represent individual tasks that can be scheduled and executed on one of the machine's cores. These threads utilize semaphores to manage access to shared resources, preventing conflicts and ensuring smooth operation.
@@ -253,10 +338,7 @@ The SocraticAgent's architecture is bolstered by an advanced multitasking framew
 - **Semaphore Coordination**: Semaphores are employed to orchestrate the execution of tasks, preventing race conditions and ensuring that critical sections of code are accessed in a controlled manner.
 - **Efficient Resource Allocation**: The Job System intelligently allocates resources, ensuring that each Thread and Fiber has the necessary computational power to perform optimally without wastage.
 
-By intertwining Threads and Fibers with the existing Parallel State Machine, the SocraticAgent achieves a new level of multitasking capability. This design not only enhances the agent's ability to process multiple streams of information but also fortifies its capacity to execute complex, concurrent tasks within the dynamic and demanding context of game environments.
-
 ## Optimized Reward Signal Framework
-
 The SocraticAgent's performance is driven by an optimized reward signal framework that ensures adaptive and goal-oriented behavior. This framework is designed to evaluate and reinforce the agent's actions across various states, with a particular focus on the Orient state's analytical capabilities.
 
 ### Adaptive Action Potential
@@ -268,7 +350,6 @@ The SocraticAgent's performance is driven by an optimized reward signal framewor
 - **Performance Metrics**: It quantifies the impact of behaviors on the agent's overall performance, using a variety of metrics to ensure a balanced evaluation.
 
 ### Observe State and Reward Handling
-
 The Observe state is the SocraticAgent's sensory gateway, constantly scanning the game environment to capture and process information. This state is critical as it directly influences the agent's perception and subsequent reactions within the game.
 
 #### Enhanced Data Collection
@@ -314,7 +395,7 @@ For instance, consider a terminal console sequence where the agent observes a lo
 - **Accuracy of Analysis**: The agent is rewarded for accurately identifying and interpreting the login confirmation message as an indication of a successful user session initiation.
 - **Extraction of Actionable Insights**: The agent is rewarded for deriving actionable insights, such as preparing to interact with the user or updating session logs based on the login event.
 
-### Transition and Management of the Orient State
+### Transition and Activation of the Orient State
 
 #### Dynamic Management
 The Orient state is managed dynamically, responding to the data and insights gathered during the Observe state. It plays a crucial role in interpreting observations and setting the stage for the subsequent Decide state.
@@ -344,9 +425,9 @@ The Decide state is a pivotal phase in the SocraticAgent's cognitive cycle, wher
 
 Rewards in the Decide state are distributed based on the agent's ability to make judicious decisions that contribute to achieving its goals. This ensures that the agent is not only reactive but also proactive in its approach, leading to a more robust and intelligent system capable of handling complex scenarios.
 
-### Transition and Management of the Decide State
+### Transition and Activation of the Decide State
 
-#### Dynamic Management
+#### Dynamic Activation
 The Decide state is a critical component of the SocraticAgent's cognitive process, where it makes informed decisions based on patterns, anomalies, or specific conditions identified within the game environment. This state is pivotal for determining the course of action following the analysis provided by the Orient state.
 
 #### Activation Criteria
@@ -373,9 +454,9 @@ In the Act state, the SocraticAgent takes action based on the decisions made in 
 
 Rewards are granted for actions that contribute positively towards achieving the agent's objectives, such as a secure and efficient login process, reinforcing the quality of execution.
 
-### Transition and Management of the Act State
+### Transition and Activation of the Act State
 
-#### Dynamic Management
+#### Dynamic Activation
 The Act state is where the SocraticAgent implements the decisions made in the Decide state. It's the execution phase where plans become actions within the game environment.
 
 #### Activation Criteria
