@@ -7,7 +7,7 @@
 5. Parellel State Machine (PSM)
 6. Multitasking and Concurrency
 7. Reward System Framework
-8.  Persistent Memonics and State
+8. Persistent Memonics and State
 9. Inter-Communication for States
 10. State and Property Communication
 11. Conclusion
@@ -25,6 +25,8 @@ The **Architectural Outline** provides a high-level view of the SocraticAgent's 
 - **StateProperties**: Individual properties and context for each ParallelState, enabling localized decision-making and actions without direct interference from other states.
 - **SessionProperties**: A set of properties that can be shared across ParallelStates, allowing for coordinated actions and information exchange without concurrency issues.
 - **Action Potential**: A dynamic value associated with each ParallelState that determines its activation, ensuring the agent can adapt its focus and resources as needed.
+- **MVCC**: A multi-version concurrency control system that allows for multiple versions of StateProperties to exist simultaneously, enabling efficient and non-blocking read and write operations.
+- **Messaging Service**: A biological-inspired messaging system that uses regex filters to manage event communication, ensuring that states receive only the events relevant to their function.
 
 ```text
 +-------------------+     +-------------------+     +-------------------+
@@ -49,7 +51,7 @@ The **Architectural Outline** provides a high-level view of the SocraticAgent's 
 |                   |     |-------------------|     | +setProperty()    |
 +-------------------|     | +createJob()      |     | +getProperty()    |
          |                | +executeJob()     |     +-------------------+
-         V                +-------------------+             |
+         V                +-------------------+            |
 +-------------------+             |                        |
 |        FSM        |             |                        |
 |-------------------|             |                        |
@@ -58,12 +60,22 @@ The **Architectural Outline** provides a high-level view of the SocraticAgent's 
 | +nextState()      |             |                        |
 +-------------------+             |                        |
          |                        |                        |
-         +-----------+------------+------------+-----------+
-                     |                         |
-+-------------------+-------------------------+-------------------+
-|                              States                            |
+         +----------+-------------+------------+-----------+
+                    |                          |
++-------------------+--------------------------+-----------------+
+|   Messaging Svc.  |                                            |
+|-------------------|                                            |
+| -eventQueue       |                                            |
+| -regexFilters     |                                            |
+| -signatureProp    |                                            |
+|-------------------|                                            |
+| +sendEvent()      |                                            |
+| +filterEvent()    |                                            |
++-------------------+                                            |
++----------------------------------------------------------------+
+|                               States                           |
 |----------------------------------------------------------------|
-| 1. Observe  2. Orient  3. Decide  4. Act  5. Learn             |
+|      1. Observe  2. Orient  3. Decide  4. Act  5. Learn        |
 |----------------------------------------------------------------|
 | +transitionLogic()                                             |
 +----------------------------------------------------------------+
@@ -92,6 +104,44 @@ The SocraticAgent's Parallel State Machine is composed of five distinct states, 
 | Decide | The Decide state is where the agent selects the most appropriate course of action based on the analysis provided by the Orient state. It involves weighing options and predicting outcomes. | Decision-making is rewarded based on the quality and effectiveness of the chosen actions. Decisions that lead to positive outcomes yield higher rewards, encouraging the agent to make sound choices. |
 | Act | The Act state is the execution phase where the agent carries out the actions determined in the Decide state. This state directly affects the game environment. | Execution is rewarded for both the precision of the actions and their impact on the environment. Successful actions that contribute to achieving the agent's goals are highly rewarded. |
 | Learn | The Learn state is a reflective phase where the agent assesses the outcomes of its actions and adapts its strategies accordingly. It is crucial for the agent's long-term improvement and adaptability. | Learning is rewarded based on the agent's ability to improve its performance over time. The agent is encouraged to develop new strategies and avoid repeating ineffective behaviors. |
+
+### Handling State and Property Conflicts
+
+In a complex system like the SocraticAgent, where multiple states operate concurrently, conflicts over shared resources or contradictory goals are inevitable. To manage these conflicts effectively, the system employs a hierarchy of strategies. Priority levels are assigned to each state, ensuring that the most critical tasks take precedence. An arbitration mechanism is in place to make context-aware decisions to resolve conflicts, especially when they arise between states with similar priority levels. Additionally, a property locking system is used to prevent simultaneous conflicting modifications to shared properties, ensuring data integrity. These strategies are complemented by dynamic priority adjustments, allowing the system to remain flexible and responsive to the changing demands of the game environment.
+
+#### Conflict Resolution Strategies
+To ensure smooth operation within the SocraticAgent, a robust conflict resolution strategy is essential. This involves:
+
+- **Priority Levels**: Assigning priority levels to states can help resolve conflicts when multiple states compete for resources or have conflicting goals.
+- **State Arbitration**: Implementing an arbitration system that can assess the context and make decisions to resolve state conflicts.
+- **Property Locking**: Using locking mechanisms on shared properties to prevent simultaneous conflicting modifications.
+
+#### Dynamic Priority Adjustment
+The agent can dynamically adjust the priorities of states based on the current situation, ensuring that the most critical tasks are addressed first.
+
+#### Feedback Loops
+Feedback loops can be established to monitor state interactions and adjust the system's behavior to prevent conflicts proactively.
+
+### Preventing Logic Loops and Overfitting
+
+The SocraticAgent’s design includes safeguards against common pitfalls such as logic loops and overfitting. Loop detection algorithms monitor state transitions for cyclical patterns, interrupting them if necessary, while state transition limits prevent infinite loops by restricting the number of transitions within a given timeframe. To avoid overfitting, regularization techniques are applied to the learning algorithms, ensuring that the agent’s strategies remain generalizable to new scenarios. Cross-validation methods further validate the agent’s performance across different environments. Moreover, a balance between exploration and exploitation is maintained, encouraging the agent to discover new strategies and adapt to the game environment, rather than overfitting to a limited set of experiences.
+
+#### Loop Detection and Interruption
+To prevent the agent from getting stuck in logic loops:
+
+- **Loop Detection Algorithms**: Implement algorithms that can detect cyclical patterns in state transitions and interrupt them.
+- **State Transition Limits**: Set limits on the number of times a state can transition within a certain timeframe to prevent infinite loops.
+
+#### Avoiding Overfitting
+To prevent the agent from overfitting:
+
+- **Regularization Techniques**: Apply regularization techniques in learning algorithms to prevent overfitting to the training data.
+- **Cross-Validation**: Use cross-validation methods to ensure that the agent's learning generalizes well to new, unseen environments.
+- **Exploration vs. Exploitation**: Balance the agent's tendency to exploit known strategies with the exploration of new ones to encourage adaptability and prevent overfitting to specific scenarios.
+
+
+
+
 
 ## Parallel State Machine Overview
 
