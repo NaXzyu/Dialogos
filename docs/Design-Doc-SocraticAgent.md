@@ -18,14 +18,6 @@ This document describes the design of the SocraticAgent, a sophisticated AI syst
 
 The **Architectural Outline** provides a high-level view of the SocraticAgent's design, illustrating the interplay between various components that govern its behavior and decision-making processes. The outline showcases the **StateChart** as the central orchestrator, managing state transitions and interactions with the **MembraneLayer** for dynamic FSM control. The **Thread Proc.** column represents the threading mechanisms that enable concurrent processing, while the **Fibers** and **Jobs** columns depict the finer granularity of task management and execution.
 
-### System Architecture
-- **ParallelStates**: The core of the agent's architecture, where each state is an independent process capable of being activated or deactivated based on its action potential.
-- **StateProperties**: Individual properties and context for each ParallelState, enabling localized decision-making and actions without direct interference from other states.
-- **SessionProperties**: A set of properties that can be shared across ParallelStates, allowing for coordinated actions and information exchange without concurrency issues.
-- **Action Potential**: A dynamic value associated with each ParallelState that determines its activation, ensuring the agent can adapt its focus and resources as needed.
-- **MVCC**: A multi-version concurrency control system that allows for multiple versions of StateProperties to exist simultaneously, enabling efficient and non-blocking read and write operations.
-- **Messaging Service**: A biological-inspired messaging system that uses regex filters to manage event communication, ensuring that states receive only the events relevant to their function.
-
 ```text
 +-------------------+     +-------------------+     +-------------------+
 |    StateChart     |     |    Thread Proc.   |     |       Fibers      |
@@ -78,6 +70,14 @@ The **Architectural Outline** provides a high-level view of the SocraticAgent's 
 | +transitionLogic()                                             |
 +----------------------------------------------------------------+
 ```
+
+### System Architecture
+- **ParallelStates**: The core of the agent's architecture, where each state is an independent process capable of being activated or deactivated based on its action potential.
+- **StateProperties**: Individual properties and context for each ParallelState, enabling localized decision-making and actions without direct interference from other states.
+- **SessionProperties**: A set of properties that can be shared across ParallelStates, allowing for coordinated actions and information exchange without concurrency issues.
+- **Action Potential**: A dynamic value associated with each ParallelState that determines its activation, ensuring the agent can adapt its focus and resources as needed.
+- **MVCC**: A multi-version concurrency control system that allows for multiple versions of StateProperties to exist simultaneously, enabling efficient and non-blocking read and write operations.
+- **Messaging Service**: A biological-inspired messaging system that uses regex filters to manage event communication, ensuring that states receive only the events relevant to their function.
 
 ## Interaction with Console Buffer
 
