@@ -3,18 +3,19 @@
 1. Introduction
 2. Architectural Outline
 3. Interaction with Console Buffer
-4. Agential States
-5. Parallel State Machine
-6. Multitasking and Concurrency
-7. Optimized Reward Signal Framework
-8. State Communication and Property Sharing
-9. Conclusion
+4. Advanced Observations
+5. Agential States
+6. Parallel State Machine
+7. Multitasking and Concurrency
+8. Optimized Reward Signal Framework
+9. State Communication and Property Sharing
+10. Conclusion
 
-## Introduction
+## 1. Introduction
 
 This document describes the design of the SocraticAgent, a sophisticated AI system for a game environment that utilizes a parallel processing architecture. Each state within the agent, known as a ParallelState, operates independently and concurrently, allowing for a dynamic and responsive AI that can adapt to complex scenarios in real-time.
 
-## Architectural Outline
+## 2. Architectural Outline
 
 The **Architectural Outline** provides a high-level view of the SocraticAgent's design, illustrating the interplay between various components that govern its behavior and decision-making processes. The outline showcases the **StateChart** as the central orchestrator, managing state transitions and interactions with the **MembraneLayer** for dynamic FSM control. The **Thread Proc.** column represents the threading mechanisms that enable concurrent processing, while the **Fibers** and **Jobs** columns depict the finer granularity of task management and execution.
 
@@ -79,7 +80,7 @@ The **Architectural Outline** provides a high-level view of the SocraticAgent's 
 - **MVCC**: A multi-version concurrency control system that allows for multiple versions of StateProperties to exist simultaneously, enabling efficient and non-blocking read and write operations.
 - **Messaging Service**: A biological-inspired messaging system that uses regex filters to manage event communication, ensuring that states receive only the events relevant to their function.
 
-## Interaction with Console Buffer
+## 3. Interaction with Console Buffer
 
 ### Overview
 This section outlines the design and interaction protocols between the AI agent's Observe state and the console buffer logs, ensuring effective observation and data retrieval even in the event of buffer clearance.
@@ -153,7 +154,7 @@ The AI agent will have mechanisms in place to access and retrieve data from the 
 #### Compatibility and Scalability
 The binary file storage system will be designed with compatibility and scalability in mind, ensuring that it can handle the evolving needs of the AI agent and the console environment. This includes considerations for future enhancements such as cloud storage integration or database indexing for faster data retrieval.
 
-## Advanced Observations
+## 4. Advanced Observations
 
 In the pursuit of creating a more sophisticated and responsive AI, our SocraticAgent has been enhanced with advanced observation and reward systems. These systems are pivotal in processing environmental data and guiding the agent's learning process through a nuanced reward mechanism.
 
@@ -177,7 +178,7 @@ The agent conducts a mathematical analysis of text patterns to understand the in
 
 Temporal data is normalized to maintain a consistent scale for the agent's observations. This normalization process converts Unix timestamps into a floating-point number between 0 and 1, allowing the agent to perceive time in a standardized manner.
 
-## Agential States
+## 5. Agential States
 The SocraticAgent's functionality is encapsulated within a Parallel State Machine, where each state operates independently and concurrently. The states are activated based on their respective action potentials, allowing the agent to adaptively manage its focus and resources. The states, in their operational sequence, are as follows:
 
 1. **Observe**: Gathers environmental data for informed decision-making.
@@ -232,7 +233,7 @@ To prevent the agent from overfitting:
 - **Cross-Validation**: Use cross-validation methods to ensure that the agent's learning generalizes well to new, unseen environments.
 - **Exploration vs. Exploitation**: Balance the agent's tendency to exploit known strategies with the exploration of new ones to encourage adaptability and prevent overfitting to specific scenarios.
 
-## Parallel State Machine
+## 6. Parallel State Machine
 The **Parallel State Machine** is a pivotal element of the SocraticAgent's framework, facilitating the simultaneous operation of multiple states. This structure is essential for the agent's advanced functionality within game environments, enabling it to handle intricate tasks and make decisions autonomously and precisely.
 
 ### Functionality and Dynamics
@@ -247,7 +248,7 @@ The **Parallel State Machine** is a pivotal element of the SocraticAgent's frame
 - **Optimal State Processing**: Reward signals are structured to direct the agent through state processing in an optimal sequence for maximum reward.
 - **Atomic Jobs and Events**: Tasks are atomic events, with the Observe state initiating the signal cascade and engaging other states as necessary.
 
-## Multitasking and Concurrency
+## 7. Multitasking and Concurrency
 The SocraticAgent's architecture is bolstered by an advanced multitasking framework that integrates a **Parallel State Machine** with a robust **Thread Processor** and **Job System**. This system is designed to manage and schedule complex concurrent tasks within the game engine and its subsystems, ensuring high efficiency and responsiveness. By intertwining Threads and Fibers with the existing Parallel State Machine, the SocraticAgent achieves a new level of multitasking capability. This design not only enhances the agent's ability to process multiple streams of information but also fortifies its capacity to execute complex, concurrent tasks within the dynamic and demanding context of game environments.
 
 ### Thread Processor and Job System
@@ -264,7 +265,7 @@ The SocraticAgent's architecture is bolstered by an advanced multitasking framew
 - **Semaphore Coordination**: Semaphores are employed to orchestrate the execution of tasks, preventing race conditions and ensuring that critical sections of code are accessed in a controlled manner.
 - **Efficient Resource Allocation**: The Job System intelligently allocates resources, ensuring that each Thread and Fiber has the necessary computational power to perform optimally without wastage.
 
-## Optimized Reward Signal Framework
+## 8. Optimized Reward Signal Framework
 The SocraticAgent's performance is driven by an optimized reward signal framework that ensures adaptive and goal-oriented behavior. This framework is designed to evaluate and reinforce the agent's actions across various states, with a particular focus on the Orient state's analytical capabilities.
 
 ### Adaptive Action Potential
@@ -528,7 +529,7 @@ By incorporating the event message object with a signature-based filtering mecha
 ##### Handling Concurrency with MVCC
 Given the need for concurrent access to StateProperties, we implement a versioning system as part of our MVCC approach. This system allows for multiple versions of StateProperties to exist, with states operating on the version that was current at the start of their transaction. This ensures that updates do not interfere with each other, and states can work with a consistent view of the data.
 
-## State Communication and Property Sharing
+## 9. State Communication and Property Sharing
 
 In the SocraticAgent's architecture, efficient communication between states is crucial for maintaining a responsive and adaptive AI. To facilitate this, we utilize the **StateProperties** object, which acts as a shared resource among states. Here's how we can structure this system:
 
@@ -541,7 +542,7 @@ State transitions are not on a fixed schedule but are triggered by action potent
 ### Messaging Service
 To manage the transfer of state information, we implement a messaging service within the PSM framework. This service doesn't send the **StateProperties** object itself but rather a reference to it.
 
-## Conclusion
+## 10. Conclusion
 
 In summary, the development of the SocraticAgent's Parallel State Machine (PSM) represents a significant advancement in the realm of game AI. By employing a sophisticated architecture that allows for concurrent state management and dynamic task scheduling, the PSM ensures that the agent can handle complex, real-time interactions within the game environment with a high degree of autonomy and efficiency.
 
