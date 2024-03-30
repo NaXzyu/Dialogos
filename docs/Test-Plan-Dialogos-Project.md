@@ -3,12 +3,13 @@
 ## Table of Contents
 1. Introduction
 2. Test Items
-3. Features to be Tested
-4. Features Not to be Tested
-5. Approach
-6. Item Pass/Fail Criteria
-7. Suspension Criteria and Resumption Requirements
-8. Test Deliverables
+3. Performance Benchmarks and A/B Testing
+4. Features to be Tested
+5. Features Not to be Tested
+6. Approach
+7. Item Pass/Fail Criteria
+8. Suspension Criteria and Resumption Requirements
+9. Test Deliverables
 10. Testing Tasks
 11. Environmental Needs
 12. Risks and Contingencies
