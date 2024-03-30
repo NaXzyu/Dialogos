@@ -10,11 +10,11 @@ jobs:
       with:
         submodules: 'recursive' # This ensures submodules are checked out
     - name: Setup Unity Environment
-      uses: game-ci/unity-actions/setup@v1
+      uses: game-ci/unity-actions/setup@v4
       with:
         unity-version: '2023.2.16f1' # Specify your Unity version here
     - name: Run Tests
-      uses: game-ci/unity-actions/test-runner@v1
+      uses: game-ci/unity-actions/test-runner@v4
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       if: always()
