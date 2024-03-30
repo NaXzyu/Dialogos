@@ -1,4 +1,4 @@
-name: Unity Tests
+name: Dialogos Engine Tests
 
 on: [push, pull_request]
 
