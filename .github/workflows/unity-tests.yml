@@ -1,0 +1,23 @@
+name: Unity Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive' # This ensures submodules are checked out
+    - name: Setup Unity Environment
+      uses: game-ci/unity-actions/setup@v1
+      with:
+        unity-version: '2023.2.16f1' # Specify your Unity version here
+    - name: Run Tests
+      uses: game-ci/unity-actions/test-runner@v1
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: Test Results
+        path: ${{ github.workspace }}/Artifacts/TestResults.xml
