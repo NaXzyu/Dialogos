@@ -4,3 +4,6 @@
 [submodule "DialogosBootloader"]
 	path = DialogosBootloader
 	url = https://github.com/NaXzyu/DialogosBootloader
+[submodule "DialogosLexicon"]
+	path = DialogosLexicon
+	url = https://github.com/NaXzyu/DialogosLexicon
